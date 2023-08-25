@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 19:58:35 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/24 22:03:17 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/08/25 00:17:20 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,6 @@ void	*r_get_buffer()
 
 void	r_clear()
 {
-	/*uint32_t	x;
-	uint32_t	y;
-
-	x = 0;
-	y = 0;
-	while (y < HEIGHT)
-	{
-		while (x < WIDTH)
-		{
-			mlx_put_pixel(g_buffer, x, y, 0);
-			x++;
-		}
-		y++;
-	}*/
-
 	uint32_t	i;
 
 	i = 0;

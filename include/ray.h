@@ -15,9 +15,10 @@ typedef struct s_hit
 {
 	float	dist;
 	t_uvec	coords;
-	t_fvec	norm;
+	bool	collide;
+	t_uvec	norm;
 }	t_hit;
 
-float	ray_cast(t_ray *r);
+t_hit	ray_cast(t_ray *r);
 
 #endif
