@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/25 01:02:12 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/08/25 14:51:50 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "cube.h"
 #include "renderer.h"
 #include "entities.h"
@@ -51,8 +52,8 @@ void	c_tick(void *param)
 	dir = ecs_comp_get(g_player, COMP_DIR);
 	cam.pos = pos->curr;
 	cam.angle = dir->curr;
+
 	world_draw(cam);
-	//mlx_put_pixel(r_get_buffer(), (uint32_t)pos->curr.x, (uint32_t)pos->curr.y, r_color(255, 255, 0, 255));
 }
 
 void	c_exit(void)

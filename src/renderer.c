@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 19:58:35 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/25 00:17:20 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/08/25 14:03:53 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <MLX42/MLX42.h>
 #include "renderer.h"
+#include "libft.h"
 
-static	mlx_image_t *g_buffer;
+static	mlx_image_t	*g_buffer;
 
 uint32_t	r_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
@@ -42,14 +43,7 @@ void	*r_get_buffer()
 	return (g_buffer);
 }
 
-void	r_clear()
+void	r_clear(void)
 {
-	uint32_t	i;
-
-	i = 0;
-	while (i < (WIDTH * HEIGHT))
-	{
-		g_buffer->pixels[i] = 0;
-		i++;
-	}
+	ft_bzero(g_buffer->pixels, (WIDTH * HEIGHT) * sizeof(uint32_t));
 }

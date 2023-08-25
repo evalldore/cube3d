@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:01:49 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/25 00:36:03 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/08/25 16:25:21 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	ray_init(t_ray *r, t_uvec *check, t_fvec *step, t_fvec *length)
 {
 	check->x = (uint32_t)r->pos.x;
 	check->y = (uint32_t)r->pos.y;
-	step->x = INFINITY;
-	step->y = INFINITY;
+	step->x = MAXFLOAT;
+	step->y = MAXFLOAT;
 	if (r->dir.x != 0.0f)
 		step->x = fabs(1.0f / r->dir.x);
 	if (r->dir.y != 0.0f)
@@ -32,32 +32,32 @@ static void	ray_init(t_ray *r, t_uvec *check, t_fvec *step, t_fvec *length)
 		length->y = (r->pos.y - (float)check->y) * step->y;
 }
 
-static t_hit	ray_loop(t_ray *r, t_uvec *check, t_fvec *step, t_fvec *length)
+static t_hit	ray_loop(t_ray *r, t_uvec check, t_fvec step, t_fvec length)
 {
 	t_hit		hit;
 	uint32_t	i;
 
 	i = 0;
 	hit.dist = 0.0f;
-	while (!r->check(*check) && i++ <= r->length)
+	while (!r->check(check) && i++ <= r->length)
 	{
 		hit.norm.x = 0;
 		hit.norm.y = 0;
-		if (length->x < length->y) 
+		if (length.x < length.y) 
 		{
-			check->x += sign(r->dir.x);
-			hit.dist = length->x;
-			length->x += step->x;
 			hit.norm.x = sign(r->dir.x);
-			continue;
-		} 
-		check->y += sign(r->dir.y);
-		hit.dist = length->y;
-		length->y += step->y;
+			check.x += hit.norm.x;
+			hit.dist = length.x;
+			length.x += step.x;
+			continue ;
+		}
 		hit.norm.y = sign(r->dir.y);
+		check.y += hit.norm.y;
+		hit.dist = length.y;
+		length.y += step.y;
 	}
-	hit.collide = r->check(*check);
-	hit.coords = *check;
+	hit.collide = r->check(check);
+	hit.coords = check;
 	return (hit);
 }
 
@@ -67,8 +67,8 @@ t_hit	ray_cast(t_ray *r)
 	t_fvec	step;
 	t_fvec	length;
 	t_hit	result;
-	
+
 	ray_init(r, &check, &step, &length);
-	result = ray_loop(r, &check, &step, &length);
+	result = ray_loop(r, check, step, length);
 	return (result);
 }

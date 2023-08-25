@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:42:38 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/24 22:49:31 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/08/25 13:56:56 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 
 float	dist(float x1, float y1, float x2, float y2)
 {
-	float dist_x = (x2 - x1);
-	float dist_y = (y2 - y1);
+	float	dist_x;
+	float	dist_y;
+
+	dist_x = (x2 - x1);
+	dist_y = (y2 - y1);
 	return (sqrt((dist_x * dist_x) + (dist_y * dist_y)));
 }
 

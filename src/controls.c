@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:58:18 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/24 22:36:08 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/08/25 14:30:46 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "entities.h"
 #include "utils.h"
-#define	TURN_SPEED 5
+#define TURN_SPEED 5
 #define SPEED 5
 
 static bool	set(uint32_t key, t_comp_ctrl *ctrl, bool toggle)
@@ -63,6 +63,10 @@ static void	move(t_comp_pos *pos, float dir, float scale, float dt)
 {
 	pos->curr.x += (cos(dir) * SPEED * dt) * scale;
 	pos->curr.y += (sin(dir) * SPEED * dt) * scale;
+	if (pos->curr.x < 0.0f)
+		pos->curr.x = 0.0f;
+	if (pos->curr.y < 0.0f)
+		pos->curr.y = 0.0f;
 }
 
 void	sys_controls(uint32_t ent, va_list args)

@@ -1,5 +1,5 @@
 NAME	:= cube3d
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wunreachable-code -Ofast -flto
 SRCDDIR	:= ./src/
 BINDIR	:= ./bin/
 LIBMLX	:= ./lib/MLX42

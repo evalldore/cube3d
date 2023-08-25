@@ -16,7 +16,7 @@ typedef struct s_hit
 	float	dist;
 	t_uvec	coords;
 	bool	collide;
-	t_uvec	norm;
+	t_ivec	norm;
 }	t_hit;
 
 t_hit	ray_cast(t_ray *r);
