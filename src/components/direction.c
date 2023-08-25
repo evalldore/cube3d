@@ -3,27 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   direction.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 17:10:30 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/24 00:31:18 by evallee-         ###   ########.fr       */
+/*   Created: 2023/08/24 20:38:42 by niceguy           #+#    #+#             */
+/*   Updated: 2023/08/24 20:44:30 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "entities.h"
 
-void	direction_new(void *ptr, va_list args)
+void	direction_new(void	*ptr, va_list args)
 {
-	t_c_dir	*dir;
+	t_comp_dir	*dir;
 
 	dir = ptr;
-	dir->curr = va_arg(args, int);
+	dir->curr = (float)va_arg(args, double);
+	dir->last = dir->curr;
 }
 
-void	comp_dir_reg(void)
+void	comp_dir_reg()
 {
-	size_t	size;
-
-	size = sizeof(t_c_dir);
-	ecs_comp_register(COMP_DIRECTION, size, &direction_new, NULL);
+	ecs_comp_register(COMP_DIR, sizeof(t_comp_dir), direction_new, NULL);
 }

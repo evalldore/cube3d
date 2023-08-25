@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:44:56 by evallee-          #+#    #+#             */
-/*   Updated: 2023/02/15 14:30:34 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:39:51 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	if (!str)
 		return (0);

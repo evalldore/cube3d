@@ -11,7 +11,7 @@ SRCS	= ft_isalpha.c \
 		ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 		ft_lstclear.c ft_lstiter.c ft_lstmap.c ft_printf.c \
 		ft_putaddr_fd.c ft_putuint_fd.c ft_revbits.c ft_puthex_fd.c \
-		ft_get_next_line.c
+		ft_getnextline.c
 OBJS		= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 NAME		= libft.a
 INCDIR		= include/
@@ -25,18 +25,21 @@ CC			= gcc
 all : $(NAME)
 
 $(BINDIR)%.o : $(SRCDIR)%.c
-	$(CC) -c $(CFLAGS) -o $@ $^ -I $(INCDIR)
+	@$(CC) -c $(CFLAGS) -o $@ $^ -I $(INCDIR)
 
 $(NAME) : $(BINDIR) $(OBJS)
-	$(LIBC) $@ $(OBJS)
+	@echo LIBFT: Creating library.
+	@$(LIBC) $@ $(OBJS)
 
 $(BINDIR) :
-	mkdir $(BINDIR)
+	@mkdir $(BINDIR)
 
 clean :
-	$(RM) -r $(BINDIR)
+	@echo LIBFT: Clearing binaries
+	@$(RM) -r $(BINDIR)
 
 fclean : clean
-	$(RM) $(NAME)
+	@echo LIBFT: Deleting library.
+	@$(RM) $(NAME)
 
 re : fclean all

@@ -6,24 +6,9 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:18:29 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/18 21:11:36 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:33:18 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-• Your function has to handle the following conversions: cspdiuxX%
-
-You have to implement the following conversions:
-* %c Prints a single character.
-* %s Prints a string (as defined by the common C convention).
-* %p The void * pointer argument has to be printed in hexadecimal format.
-* %d Prints a decimal (base 10) number.
-* %i Prints an integer in base 10.
-* %u Prints an unsigned decimal (base 10) number.
-• %x Prints a number in hexadecimal (base 16) lowercase format.
-• %X Prints a number in hexadecimal (base 16) uppercase format.
-* %% Prints a percent sign.
-*/
 
 #include "libft.h"
 

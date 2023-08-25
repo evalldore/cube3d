@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/21 18:50:28 by evallee-          #+#    #+#             */
-/*   Updated: 2023/02/21 19:04:01 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:37:03 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+size_t	ft_lstsize(t_list *lst)
 {
-	int		i;
+	size_t	i;
 
 	if (!lst)
 		return (0);

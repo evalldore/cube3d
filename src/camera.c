@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interact.h                                         :+:      :+:    :+:   */
+/*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/01 23:15:00 by niceguy           #+#    #+#             */
-/*   Updated: 2023/04/04 04:02:25 by niceguy          ###   ########.fr       */
+/*   Created: 2023/08/24 16:33:38 by niceguy           #+#    #+#             */
+/*   Updated: 2023/08/24 20:46:49 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INTERACT_H
-# define INTERACT_H
-# include <stdint.h>
-# include "entities.h"
-# include "assets.h"
-# include "game.h"
-# include "so_long.h"
+#include "camera.h"
+#include "math.h"
+#include "utils.h"
 
-void		interact(void *params, uint32_t ent1, uint32_t ent2);
-void		shoot(uint32_t	player);
+t_fvec	camera_get_direction(t_camera cam)
+{
+	t_fvec	vec;
 
-#endif
+	vec.x = cos(cam.angle);
+	vec.y = sin(cam.angle);
+	return (vec);
+}
+
+t_fvec	camera_get_plane(t_camera cam)
+{
+	t_fvec		plane;
+	float		planeAngle;
+
+	planeAngle = rotate(cam.angle, deg2rad(90.f));
+	plane.x = cos(planeAngle);
+	plane.y = sin(planeAngle);
+	return (plane);
+}

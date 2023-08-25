@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:01:33 by evallee-          #+#    #+#             */
-/*   Updated: 2023/02/15 16:06:37 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:41:03 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	unsigned long	i;
-	unsigned long	j;
+	size_t	i;
+	size_t	j;
 
 	if (!haystack || !needle)
 		return (NULL);

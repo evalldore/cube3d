@@ -3,32 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/01 18:05:09 by niceguy           #+#    #+#             */
-/*   Updated: 2023/05/23 23:05:33 by evallee-         ###   ########.fr       */
+/*   Created: 2023/08/24 11:42:38 by niceguy           #+#    #+#             */
+/*   Updated: 2023/08/24 18:57:23 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "utils.h"
 
-double	clamp(double value, double min, double max)
+float	dist(float x1, float y1, float x2, float y2)
 {
-	return (fmax(min, fmin(max, value)));
+	float dist_x = (x2 - x1);
+	float dist_y = (y2 - y1);
+	return (sqrt((dist_x * dist_x) + (dist_y * dist_y)));
 }
 
-t_dvec	normalize(double x, double y)
+float	deg2rad(float a)
 {
-	double	l;
-	t_dvec	norm;
+	return (a * M_PI / 180.0f);
+}
 
-	norm.x = 0.0;
-	norm.y = 0.0;
-	l = sqrt((x * x) + (y * y));
-	if (l != 0.0)
-	{
-		norm.x = x / l;
-		norm.y = y / l;
-	}
-	return (norm);
+float	rotate(float rad, float dist)
+{
+	rad = rad + dist;
+	if (rad < 0.0f)
+		rad += 2 * M_PI;
+	else if (rad > 2 * M_PI)
+		rad -= 2 * M_PI;
+	return (rad);
+}
+
+int	sign(float value)
+{
+	if (value > 0.0f)
+		return (1);
+	else if (value < 0.0f)
+		return (-1);
+	return (0);
 }

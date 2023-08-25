@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:01:32 by evallee-          #+#    #+#             */
-/*   Updated: 2023/02/24 17:34:12 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:41:49 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	char			*substr;
+	char	*substr;
 
 	if (!s)
 		return (NULL);
