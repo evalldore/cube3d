@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 15:22:00 by evallee-          #+#    #+#             */
-/*   Updated: 2023/03/02 03:27:24 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/08/25 23:07:15 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ void	ft_bzero(void *s, size_t n)
 {
 	if (!s)
 		return ;
-	ft_memset(s, '\0', n);
+	ft_memset(s, 0, n);
 }

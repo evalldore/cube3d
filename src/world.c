@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/25 16:29:20 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/08/25 23:32:19 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,29 @@ bool	world_is_wall(t_uvec check)
 static void	draw_line(uint32_t x, t_hit result)
 {
 	uint32_t	color;
-	float		line_h;
-	float		line_o;
+	uint32_t	line_h;
+	int32_t		line[2];
+	uint32_t	y;
+	float		fade;
 
-	line_h = (HEIGHT >> 1) - ((HEIGHT >> 1) / result.dist);
-	line_o = HEIGHT - line_h;
-	color = r_color(255, 0, 0, 255);
-	if (result.norm.x != 0)
-		color = r_color(100, 0, 0, 255);
-	if (line_o < HEIGHT)
-		mlx_put_pixel(r_get_buffer(), x, (uint32_t)line_o, color);
+	fade = fmax(1.0f - (result.dist / 11.0f), 0.0f);
+	color = r_color(100 * fade, 0, 0, 255);
+	if (result.norm.x < 0)
+		color = r_color(0, 100 * fade, 0, 255);
+	if (result.norm.y > 0)
+		color = r_color(100 * fade, 100 * fade, 0, 255);
+	if (result.norm.y < 0)
+		color = r_color(0, 0, 100 * fade, 255);
+	line_h = (int)(HEIGHT / result.dist);
+	line[0] = -(line_h >> 1) + (HEIGHT >> 1);
+	if(line[0] < 0) 
+		line[0] = 0;
+	line[1] = (line_h >> 1) + (HEIGHT >> 1);
+	if(line[1] >= HEIGHT)
+		line[1] = HEIGHT - 1;
+	y = line[0];
+	while (y < line[1])
+		mlx_put_pixel(r_get_buffer(), x, y++, color);
 }
 
 void	world_draw(t_camera cam)

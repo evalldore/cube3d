@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 19:58:35 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/25 14:03:53 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/08/25 23:27:31 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,20 @@ void	*r_get_buffer()
 	return (g_buffer);
 }
 
-void	r_clear(void)
+void	r_clear(uint32_t color)
 {
-	ft_bzero(g_buffer->pixels, (WIDTH * HEIGHT) * sizeof(uint32_t));
+	size_t			l;
+	size_t			i;
+	uint8_t			*mem;
+
+	i = 0;
+	l = (WIDTH * HEIGHT) * sizeof(uint32_t);
+	mem = g_buffer->pixels;
+	while (i < l)
+	{
+		mem[i++] = (uint8_t)(color >> 24);
+		mem[i++] = (uint8_t)(color >> 16);
+		mem[i++] = (uint8_t)(color >> 8);
+		mem[i++] = (uint8_t)color;
+	}
 }

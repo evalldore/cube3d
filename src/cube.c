@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/25 14:51:50 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/08/25 23:28:11 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	c_tick(void *param)
 	t_comp_dir	*dir;
 	t_camera	cam;
 
-	r_clear();
+	r_clear(r_color(0, 0, 0, 255));
 	ecs_iterate(sys_controls, param);
 	pos = ecs_comp_get(g_player, COMP_POS);
 	dir = ecs_comp_get(g_player, COMP_DIR);
