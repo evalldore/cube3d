@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:58:18 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/25 14:30:46 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/08/26 00:35:06 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "entities.h"
 #include "utils.h"
+#include "world.h"
 #define TURN_SPEED 5
 #define SPEED 5
 
@@ -59,14 +60,23 @@ void	sys_controls_keys(mlx_key_data_t keydata, void *param)
 	}
 }
 
-static void	move(t_comp_pos *pos, float dir, float scale, float dt)
+static t_fvec	move(t_fvec pos, float dir, float scale, float dt)
 {
-	pos->curr.x += (cos(dir) * SPEED * dt) * scale;
-	pos->curr.y += (sin(dir) * SPEED * dt) * scale;
-	if (pos->curr.x < 0.0f)
-		pos->curr.x = 0.0f;
-	if (pos->curr.y < 0.0f)
-		pos->curr.y = 0.0f;
+	t_uvec	check;
+
+	check.x = (uint32_t)(pos.x + cos(dir) * (0.5f * scale));
+	check.y = (uint32_t)pos.y;
+	if (world_is_wall(check) == 0)
+		pos.x += (cos(dir) * SPEED * dt) * scale;
+	check.x = (uint32_t)pos.x;
+	check.y = (uint32_t)(pos.y + sin(dir) * (0.5f * scale));
+	if (world_is_wall(check) == 0)
+		pos.y += (sin(dir) * SPEED * dt) * scale;
+	if (pos.x < 0.0f)
+		pos.x = 0.0f;
+	if (pos.y < 0.0f)
+		pos.y = 0.0f;
+	return (pos);
 }
 
 void	sys_controls(uint32_t ent, va_list args)
@@ -83,9 +93,9 @@ void	sys_controls(uint32_t ent, va_list args)
 	if (!ctrl || !pos || !dir)
 		return ;
 	if (ctrl->up)
-		move(pos, dir->curr, 1.0, mlx->delta_time);
+		pos->curr = move(pos->curr, dir->curr, 1.0, mlx->delta_time);
 	if (ctrl->down)
-		move(pos, dir->curr, -1.0, mlx->delta_time);
+		pos->curr = move(pos->curr, dir->curr, -1.0, mlx->delta_time);
 	if (ctrl->right)
 		dir->curr = rotate(dir->curr, TURN_SPEED * mlx->delta_time);
 	if (ctrl->left)

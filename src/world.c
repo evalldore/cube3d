@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/25 23:32:19 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/08/26 00:54:09 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	world_draw(t_camera cam)
 	dir = camera_get_direction(cam);
 	while (i < WIDTH)
 	{
-		float cameraX = 2.0f * ((float)i / HEIGHT) - 1.0f;
+		float cameraX = 2.0f * ((float)i / WIDTH) - 1.0f;
 		ray.pos = cam.pos;
 		ray.dir.x = dir.x + plane.x * cameraX;
 		ray.dir.y = dir.y + plane.y * cameraX;
