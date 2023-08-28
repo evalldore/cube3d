@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/26 00:54:09 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/08/27 01:58:31 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "world.h"
 #include "libft.h"
 
+static float		g_z_buffer[WIDTH];
 static uint32_t		g_world_w = 16;
 static uint32_t		g_world_h = 16;
 static uint32_t		g_map[][16] = {
@@ -77,30 +78,42 @@ static void	draw_line(uint32_t x, t_hit result)
 	y = line[0];
 	while (y < line[1])
 		mlx_put_pixel(r_get_buffer(), x, y++, color);
+	g_z_buffer[x] = result.dist;
+}
+
+static void	clear()
+{
+	uint32_t	x;
+
+	x = 0;
+	while (x < WIDTH)
+		g_z_buffer[x++] = INFINITY;
+	
 }
 
 void	world_draw(t_camera cam)
 {
-	uint32_t	i;
+	uint32_t	x;
 	t_fvec		plane;
 	t_fvec		dir;
 	t_ray		ray;
 	t_hit		result;
 
-	i = 0;
+	x = 0;
 	plane = camera_get_plane(cam);
 	dir = camera_get_direction(cam);
-	while (i < WIDTH)
+	clear();
+	while (x < WIDTH)
 	{
-		float cameraX = 2.0f * ((float)i / WIDTH) - 1.0f;
+		float cameraX = 2.0f * ((float)x / WIDTH) - 1.0f;
 		ray.pos = cam.pos;
 		ray.dir.x = dir.x + plane.x * cameraX;
 		ray.dir.y = dir.y + plane.y * cameraX;
-		ray.length = 16;
+		ray.length = 18;
 		ray.check = world_is_wall;
 		result = ray_cast(&ray);
 		if (result.collide)
-			draw_line(i, result);
-		i++;
+			draw_line(x, result);
+		x++;
 	}
 }
