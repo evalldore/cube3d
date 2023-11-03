@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 19:58:35 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/26 02:11:00 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/11/03 16:02:12 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	r_init(void	*param)
 	mlx_image_to_window(mlx, g_buffer, 0, 0);
 }
 
-void	*r_get_buffer()
+void	*r_get_buffer(void)
 {
 	return (g_buffer);
 }

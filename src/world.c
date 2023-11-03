@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/27 01:58:31 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/11/03 16:01:49 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ static void	draw_line(uint32_t x, t_hit result)
 		color = r_color(0, 0, 100 * fade, 255);
 	line_h = (int)(HEIGHT / result.dist);
 	line[0] = -(line_h >> 1) + (HEIGHT >> 1);
-	if(line[0] < 0) 
+	if (line[0] < 0) 
 		line[0] = 0;
 	line[1] = (line_h >> 1) + (HEIGHT >> 1);
-	if(line[1] >= HEIGHT)
+	if (line[1] >= HEIGHT)
 		line[1] = HEIGHT - 1;
 	y = line[0];
 	while (y < line[1])
@@ -81,14 +81,13 @@ static void	draw_line(uint32_t x, t_hit result)
 	g_z_buffer[x] = result.dist;
 }
 
-static void	clear()
+static void	clear(void)
 {
 	uint32_t	x;
 
 	x = 0;
 	while (x < WIDTH)
 		g_z_buffer[x++] = INFINITY;
-	
 }
 
 void	world_draw(t_camera cam)
