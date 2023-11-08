@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:01:49 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/25 19:17:24 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/11/08 18:02:28 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ray_init(t_ray *r, t_uvec *check, t_fvec *step, t_fvec *length)
 {
 	check->x = (uint32_t)r->pos.x;
 	check->y = (uint32_t)r->pos.y;
-	step->x = INFINITY;
+	step->x = INFINITY; // INFINITY NOT VALID
 	step->y = INFINITY;
 	if (r->dir.x != 0.0f)
 		step->x = fabs(1.0f / r->dir.x);
