@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   renderer.h                                         :+:      :+:    :+:   */
+/*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 15:22:21 by evallee-          #+#    #+#             */
-/*   Updated: 2023/11/22 18:01:43 by evallee-         ###   ########.fr       */
+/*   Created: 2023/11/22 16:42:01 by evallee-          #+#    #+#             */
+/*   Updated: 2023/11/22 18:02:36 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDERER_H
-# include <stdint.h>
-# include <MLX42/MLX42.h>
-# define RENDERER_H
-# define WIDTH 800
-# define HEIGHT 600
+#include "line.h"
 
-typedef struct s_buffer
+void	r_draw_line(t_uvec start, uint32_t len, uint32_t color)
 {
-	mlx_image_t	*frame;
-	float		depth[WIDTH];
-}	t_buffer;
+	uint32_t	y;
+	t_buffer	*buffer;
 
-void		r_init(void	*param);
-void		r_clear(uint32_t color);
-uint32_t	r_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-void		*r_get_buffer(void);
-
-#endif
+	y = start.y;
+	buffer = r_get_buffer();
+	while (y < len)
+		mlx_put_pixel(buffer->frame, start.x, y++, color);
+}

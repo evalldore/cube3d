@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/11/03 16:55:26 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:11:26 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <stdint.h>
 #include <MLX42/MLX42.h>
 #include "renderer.h"
+#include "line.h"
 #include "ray.h"
 #include "world.h"
 #include "libft.h"
 
-static float		g_z_buffer[WIDTH];
 static uint32_t		g_world_w = 16;
 static uint32_t		g_world_h = 16;
 static uint32_t		g_map[][16] = {
@@ -52,12 +52,17 @@ bool	world_is_wall(t_uvec check)
 	return (true);
 }
 
+static void setup_points()
+{
+
+}
+
 static void	draw_line(uint32_t x, t_hit result)
 {
 	uint32_t	color;
 	uint32_t	line_h;
 	int32_t		line[2];
-	uint32_t	y;
+	t_uvec		pos;
 	float		fade;
 
 	fade = fmax(1.0f - (result.dist / 11.0f), 0.0f);
@@ -75,19 +80,9 @@ static void	draw_line(uint32_t x, t_hit result)
 	line[1] = (line_h >> 1) + (HEIGHT >> 1);
 	if (line[1] >= HEIGHT)
 		line[1] = HEIGHT - 1;
-	y = line[0];
-	while (y < line[1])
-		mlx_put_pixel(r_get_buffer(), x, y++, color);
-	g_z_buffer[x] = result.dist;
-}
-
-static void	clear(void)
-{
-	uint32_t	x;
-
-	x = 0;
-	while (x < WIDTH)
-		g_z_buffer[x++] = INFINITY;
+	pos.x = x;
+	pos.y = line[0];
+	r_draw_line(pos, line[1], color);
 }
 
 void	world_draw(t_camera cam)
@@ -101,7 +96,6 @@ void	world_draw(t_camera cam)
 	x = 0;
 	plane = camera_get_plane(cam);
 	dir = camera_get_direction(cam);
-	clear();
 	while (x < WIDTH)
 	{
 		float cameraX = 2.0f * ((float)x / WIDTH) - 1.0f;

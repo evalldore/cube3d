@@ -8,7 +8,7 @@ ECS		:= ./lib/ecs
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include -I $(ECS)/include
 LIBS	:= $(ECS)/ecs.a $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
-SRCS	:= main.c cube.c renderer.c world.c utils.c ray.c camera.c entities.c controls.c \
+SRCS	:= main.c cube.c renderer.c world.c utils.c ray.c camera.c entities.c line.c assets.c controls.c \
 			components/position.c components/direction.c components/control.c
 OBJS	:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 

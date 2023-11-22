@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/11/03 16:02:26 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:45:56 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 #include "entities.h"
 #include "world.h"
 #include "camera.h"
+#include "assets.h"
 
 static uint32_t	g_player;
 
 bool	c_init(void *params)
 {
+	assets_init(params);
 	r_init(params);
 	ents_init();
 	g_player = ents_player((t_fvec){2.0f, 2.0f}, 0.0f);

@@ -6,15 +6,16 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 19:58:35 by niceguy           #+#    #+#             */
-/*   Updated: 2023/11/03 16:02:12 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:09:47 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <MLX42/MLX42.h>
 #include "renderer.h"
 #include "libft.h"
+#include "math.h"
 
-static	mlx_image_t	*g_buffer;
+static t_buffer	*g_buffer;
 
 uint32_t	r_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
@@ -29,13 +30,18 @@ uint32_t	r_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 
 void	r_init(void	*param)
 {
-	mlx_t	*mlx;
+	mlx_t		*mlx;
+	mlx_image_t	*frame;
 
-	mlx = param;
-	g_buffer = mlx_new_image(mlx, WIDTH, HEIGHT);
+	g_buffer = malloc(sizeof(t_buffer));
 	if (!g_buffer)
 		return ;
-	mlx_image_to_window(mlx, g_buffer, 0, 0);
+	mlx = param;
+	frame = mlx_new_image(mlx, WIDTH, HEIGHT);
+	if (!frame)
+		return ;
+	mlx_image_to_window(mlx, frame, 0, 0);
+	g_buffer->frame = frame;
 }
 
 void	*r_get_buffer(void)
@@ -45,14 +51,16 @@ void	*r_get_buffer(void)
 
 void	r_clear(uint32_t color)
 {
-	size_t			l;
 	size_t			i;
 	uint8_t			*mem;
+	size_t			x;
 
+	x = 0;
+	while (x < WIDTH)
+		g_buffer->depth[x++] = INFINITY;
 	i = 0;
-	l = (WIDTH * HEIGHT) * sizeof(uint32_t);
-	mem = g_buffer->pixels;
-	while (i < l)
+	mem = g_buffer->frame->pixels;
+	while (i < ((WIDTH * HEIGHT) * sizeof(uint32_t)))
 	{
 		mem[i++] = (uint8_t)(color >> 24);
 		mem[i++] = (uint8_t)(color >> 16);

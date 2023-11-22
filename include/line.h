@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   renderer.h                                         :+:      :+:    :+:   */
+/*   line.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 15:22:21 by evallee-          #+#    #+#             */
-/*   Updated: 2023/11/22 18:01:43 by evallee-         ###   ########.fr       */
+/*   Created: 2023/11/22 16:45:19 by evallee-          #+#    #+#             */
+/*   Updated: 2023/11/22 17:50:38 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDERER_H
-# include <stdint.h>
-# include <MLX42/MLX42.h>
-# define RENDERER_H
-# define WIDTH 800
-# define HEIGHT 600
+#ifndef LINE_H
+# define LINE_H
+# include "renderer.h"
+# include "vector.h"
 
-typedef struct s_buffer
+typedef struct s_point
 {
-	mlx_image_t	*frame;
-	float		depth[WIDTH];
-}	t_buffer;
+	t_fvec		tex;
+	t_uvec		pos;
+	uint32_t	color;
+}	t_point;
 
-void		r_init(void	*param);
-void		r_clear(uint32_t color);
-uint32_t	r_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-void		*r_get_buffer(void);
+void	r_draw_line(t_uvec start, uint32_t len, uint32_t color);
 
 #endif

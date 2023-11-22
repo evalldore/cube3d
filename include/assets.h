@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   renderer.h                                         :+:      :+:    :+:   */
+/*   assets.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 15:22:21 by evallee-          #+#    #+#             */
-/*   Updated: 2023/11/22 18:01:43 by evallee-         ###   ########.fr       */
+/*   Created: 2023/03/22 05:07:51 by niceguy           #+#    #+#             */
+/*   Updated: 2023/11/22 17:00:17 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDERER_H
-# include <stdint.h>
+#ifndef ASSETS_H
+# define ASSETS_H
 # include <MLX42/MLX42.h>
-# define RENDERER_H
-# define WIDTH 800
-# define HEIGHT 600
+# include <stdlib.h>
+# define MAX_FRAMES 4
+# define WALLSIZE 64
 
-typedef struct s_buffer
+enum	e_asset
 {
-	mlx_image_t	*frame;
-	float		depth[WIDTH];
-}	t_buffer;
+	ASSET_NONE,
+	ASSET_WALL,
+	MAX_ASSETS
+};
 
-void		r_init(void	*param);
-void		r_clear(uint32_t color);
-uint32_t	r_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
-void		*r_get_buffer(void);
+typedef struct s_assets
+{
+	mlx_texture_t	*textures[MAX_ASSETS];
+	mlx_image_t		*images[MAX_ASSETS];
+}	t_assets;
+
+mlx_image_t	*assets_get(int32_t	asset);
+void		assets_init(mlx_t *mlx);
 
 #endif
