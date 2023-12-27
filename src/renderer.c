@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 19:58:35 by niceguy           #+#    #+#             */
-/*   Updated: 2023/11/22 18:09:47 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:29:07 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	r_init(void	*param)
 	g_buffer->frame = frame;
 }
 
-void	*r_get_buffer(void)
+t_buffer	*r_get_buffer(void)
 {
 	return (g_buffer);
 }

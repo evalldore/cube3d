@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:01:43 by evallee-          #+#    #+#             */
-/*   Updated: 2023/11/08 18:01:45 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:54:42 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_hit
 	float	dist;
 	t_uvec	coords;
 	bool	collide;
+	t_fvec	pos;
 	t_ivec	norm;
 }	t_hit;
 

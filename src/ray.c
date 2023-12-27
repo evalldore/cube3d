@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:01:49 by niceguy           #+#    #+#             */
-/*   Updated: 2023/11/08 18:02:28 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:24:17 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	ray_init(t_ray *r, t_uvec *check, t_fvec *step, t_fvec *length)
 {
 	check->x = (uint32_t)r->pos.x;
 	check->y = (uint32_t)r->pos.y;
-	step->x = INFINITY; // INFINITY NOT VALID
+	step->x = INFINITY;
 	step->y = INFINITY;
 	if (r->dir.x != 0.0f)
 		step->x = fabs(1.0f / r->dir.x);
@@ -70,5 +70,7 @@ t_hit	ray_cast(t_ray *r)
 
 	ray_init(r, &check, &step, &length);
 	result = ray_loop(r, check, step, length);
+	result.pos.x = r->pos.x + r->dir.x * result.dist;
+	result.pos.y = r->pos.y + r->dir.y * result.dist;
 	return (result);
 }

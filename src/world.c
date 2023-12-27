@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/11/22 18:11:26 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/12/27 13:58:32 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "line.h"
 #include "ray.h"
 #include "world.h"
+#include "assets.h"
 #include "libft.h"
 
 static uint32_t		g_world_w = 16;
@@ -52,37 +53,42 @@ bool	world_is_wall(t_uvec check)
 	return (true);
 }
 
-static void setup_points()
+static uint32_t	calc_coord(t_hit result)
 {
+	float	coord;
 
+	if (result.norm.x != 0)
+		coord = result.pos.y;
+	else if (result.norm.y != 0)
+		coord = result.pos.x;
+	coord -= (float)floor((double)coord);
+	return ((int)(coord * (float)(TEXTURE_SIZE)));
 }
 
 static void	draw_line(uint32_t x, t_hit result)
 {
-	uint32_t	color;
+	uint32_t	asset_index;
 	uint32_t	line_h;
 	int32_t		line[2];
-	t_uvec		pos;
 	float		fade;
 
 	fade = fmax(1.0f - (result.dist / 11.0f), 0.0f);
-	color = r_color(100 * fade, 0, 0, 255);
-	if (result.norm.x < 0)
-		color = r_color(0, 100 * fade, 0, 255);
+	asset_index = ASSET_WALL;
+	/*if (result.norm.x < 0)
+		asset_index = ASSET_WALL;
 	if (result.norm.y > 0)
-		color = r_color(100 * fade, 100 * fade, 0, 255);
+		asset_index = ASSET_WALL;
 	if (result.norm.y < 0)
-		color = r_color(0, 0, 100 * fade, 255);
+		asset_index = ASSET_WALL;*/
 	line_h = (int)(HEIGHT / result.dist);
-	line[0] = -(line_h >> 1) + (HEIGHT >> 1);
+	line[0] = -(line_h / 2) + (HEIGHT / 2);
 	if (line[0] < 0) 
 		line[0] = 0;
-	line[1] = (line_h >> 1) + (HEIGHT >> 1);
+	line[1] = (line_h / 2) + (HEIGHT / 2);
 	if (line[1] >= HEIGHT)
 		line[1] = HEIGHT - 1;
-	pos.x = x;
-	pos.y = line[0];
-	r_draw_line(pos, line[1], color);
+	r_set_asset(asset_index);
+	r_draw_line(x, line, line_h, calc_coord(result));
 }
 
 void	world_draw(t_camera cam)

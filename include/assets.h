@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:07:51 by niceguy           #+#    #+#             */
-/*   Updated: 2023/11/22 17:00:17 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:12:06 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <MLX42/MLX42.h>
 # include <stdlib.h>
 # define MAX_FRAMES 4
-# define WALLSIZE 64
+# define TEXTURE_SIZE 64
 
 enum	e_asset
 {
