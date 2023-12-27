@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/27 13:58:32 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/12/27 15:28:05 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	draw_line(uint32_t x, t_hit result)
 	if (line[1] >= HEIGHT)
 		line[1] = HEIGHT - 1;
 	r_set_asset(asset_index);
-	r_draw_line(x, line, line_h, calc_coord(result));
+	r_draw_line(x, (uint32_t *)line, line_h, calc_coord(result));
 }
 
 void	world_draw(t_camera cam)

@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:42:01 by evallee-          #+#    #+#             */
-/*   Updated: 2023/12/27 14:38:23 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/12/27 15:26:54 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static uint32_t	calc_tex_coord(uint32_t tex_x, uint32_t tex_y)
 	return (TEXTURE_SIZE * tex_y + tex_x);
 }
 
-void	r_draw_line(uint32_t x, uint32_t line[2], uint32_t len, uint32_t tex_x)
+void	r_draw_line(uint32_t x, uint32_t *line, uint32_t len, uint32_t tex_x)
 {
 	mlx_image_t	*asset;
 	float		tex_step;
