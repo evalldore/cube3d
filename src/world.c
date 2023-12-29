@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/27 15:28:05 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/12/29 14:55:43 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ static void	draw_line(uint32_t x, t_hit result)
 	float		fade;
 
 	fade = fmax(1.0f - (result.dist / 11.0f), 0.0f);
-	asset_index = ASSET_WALL;
-	/*if (result.norm.x < 0)
-		asset_index = ASSET_WALL;
-	if (result.norm.y > 0)
-		asset_index = ASSET_WALL;
+	asset_index = ASSET_WALL_SOUTH;
+	if (result.norm.x < 0)
+		asset_index = ASSET_WALL_WEST;
+	if (result.norm.x > 0)
+		asset_index = ASSET_WALL_EAST;
 	if (result.norm.y < 0)
-		asset_index = ASSET_WALL;*/
+		asset_index = ASSET_WALL_NORTH;
 	line_h = (int)(HEIGHT / result.dist);
 	line[0] = -(line_h / 2) + (HEIGHT / 2);
 	if (line[0] < 0) 
