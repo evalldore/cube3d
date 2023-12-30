@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   direction.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:38:42 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/24 20:44:30 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/12/29 19:22:22 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	direction_new(void	*ptr, va_list args)
 	dir->last = dir->curr;
 }
 
-void	comp_dir_reg()
+void	comp_dir_reg(void)
 {
 	ecs_comp_register(COMP_DIR, sizeof(t_comp_dir), direction_new, NULL);
 }

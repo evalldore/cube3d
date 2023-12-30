@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   position.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:26:59 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/24 20:40:09 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/12/29 19:22:26 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	position_new(void *ptr, va_list args)
 	pos->last = pos->curr;
 }
 
-void	comp_pos_reg()
+void	comp_pos_reg(void)
 {
 	ecs_comp_register(COMP_POS, sizeof(t_comp_pos), position_new, NULL);
 }

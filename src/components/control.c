@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:26:59 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/24 20:44:13 by niceguy          ###   ########.fr       */
+/*   Updated: 2023/12/29 19:22:45 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	control_new(void *ptr, va_list args)
 	ctrl->right = false;
 }
 
-void	comp_ctrl_reg()
+void	comp_ctrl_reg(void)
 {
 	ecs_comp_register(COMP_CTRL, sizeof(t_comp_ctrl), control_new, NULL);
 }

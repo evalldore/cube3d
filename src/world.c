@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 17:00:17 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/12/29 19:24:31 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	world_draw(t_camera cam)
 		ray.pos = cam.pos;
 		ray.dir.x = dir.x + plane.x * cameraX;
 		ray.dir.y = dir.y + plane.y * cameraX;
-		ray.length = 18;
+		ray.length = DRAW_DISTANCE;
 		ray.check = world_is_wall;
 		result = ray_cast(&ray);
 		if (result.collide)

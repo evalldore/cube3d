@@ -8,7 +8,7 @@ RENDDIR		:= renderer/
 
 SRCS		:= main.c cube.c world.c utils.c ray.c camera.c entities.c assets.c controls.c
 COMPSRCS	:= position.c direction.c control.c
-RENDSRCS	:= renderer.c color.c buffer.c line.c background.c
+RENDSRCS	:= renderer.c color.c buffer.c line.c background.c floor.c
 SRCS		+= $(addprefix $(COMPDIR), $(COMPSRCS))
 SRCS		+= $(addprefix $(RENDDIR), $(RENDSRCS))
 

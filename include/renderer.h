@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:22:21 by evallee-          #+#    #+#             */
-/*   Updated: 2023/12/29 17:25:11 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/12/29 19:42:43 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define RENDERER_H
 # define WIDTH 800
 # define HEIGHT 600
+# define DRAW_DISTANCE 24
 
 typedef struct s_buffer
 {
@@ -42,5 +43,6 @@ t_buffer	*r_get_buffer(void);
 void		r_draw_line(uint32_t x, int32_t line[], uint32_t len, uint32_t coordx);
 void		r_back_init(mlx_t	*mlx);
 void		r_set_asset(uint32_t index);
+void		r_floor_init(mlx_t *mlx);
 
 #endif

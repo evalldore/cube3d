@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   renderer.c                                         :+:      :+:    :+:   */
+/*   floor.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 19:58:35 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 19:43:04 by evallee-         ###   ########.fr       */
+/*   Created: 2023/12/29 19:34:42 by evallee-          #+#    #+#             */
+/*   Updated: 2023/12/29 19:45:46 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <MLX42/MLX42.h>
-#include "renderer.h"
 #include "libft.h"
-#include "math.h"
+#include "renderer.h"
 
-void	r_init(void	*param)
+static mlx_image_t	*g_floor;
+
+void	r_floor_init(mlx_t *mlx)
 {
-	mlx_image_t	*frame;
-	t_buffer	*buffer;
+	g_floor = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
 
-	buffer = r_get_buffer();
-	r_back_init(param);
-	r_floor_init(param);
-	frame = mlx_new_image(param, WIDTH, HEIGHT);
-	if (!frame)
-		return ;
-	mlx_image_to_window(param, frame, 0, 0);
-	buffer->frame = frame;
+	ft_memset(g_floor->pixels, 255, WIDTH * (HEIGHT / 2) * sizeof(uint32_t));
+
+	mlx_image_to_window(mlx, g_floor, 0, HEIGHT / 2);
 }
-
