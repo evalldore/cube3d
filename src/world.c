@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 14:55:43 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:00:17 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdint.h>
 #include <MLX42/MLX42.h>
 #include "renderer.h"
-#include "line.h"
 #include "ray.h"
 #include "world.h"
 #include "assets.h"
@@ -57,6 +56,7 @@ static uint32_t	calc_coord(t_hit result)
 {
 	float	coord;
 
+	coord = 0.0f;
 	if (result.norm.x != 0)
 		coord = result.pos.y;
 	else if (result.norm.y != 0)
@@ -87,8 +87,9 @@ static void	draw_line(uint32_t x, t_hit result)
 	line[1] = (line_h / 2) + (HEIGHT / 2);
 	if (line[1] >= HEIGHT)
 		line[1] = HEIGHT - 1;
+	r_set_color(255, 0, 0, 255);
 	r_set_asset(asset_index);
-	r_draw_line(x, (uint32_t *)line, line_h, calc_coord(result));
+	r_draw_line(x, line, line_h, calc_coord(result));
 }
 
 void	world_draw(t_camera cam)

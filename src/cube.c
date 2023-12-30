@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/11/22 17:45:56 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/12/29 17:45:40 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	c_tick(void *param)
 	t_comp_dir	*dir;
 	t_camera	cam;
 
-	r_clear(r_color(0, 0, 0, 255));
+	r_clear(r_calc_color(0, 0, 0, 0));
 	ecs_iterate(sys_controls, param);
 	pos = ecs_comp_get(g_player, COMP_POS);
 	dir = ecs_comp_get(g_player, COMP_DIR);

@@ -1,16 +1,24 @@
-NAME	:= cube3d
-CFLAGS	:= -Wunreachable-code -Ofast -flto
-SRCDDIR	:= ./src/
-BINDIR	:= ./bin/
-LIBMLX	:= ./lib/MLX42
-LIBFT	:= ./lib/libft
-ECS		:= ./lib/ecs
+NAME		:= cube3d
+CFLAGS		:= -Wall -Wextra -Werror -Wunreachable-code -Ofast -flto
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include -I $(ECS)/include
-LIBS	:= $(ECS)/ecs.a $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
-SRCS	:= main.c cube.c renderer.c world.c utils.c ray.c camera.c entities.c line.c assets.c controls.c \
-			components/position.c components/direction.c components/control.c
-OBJS	:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
+SRCDDIR		:= src/
+BINDIR		:= bin/
+COMPDIR 	:= components/
+RENDDIR		:= renderer/
+
+SRCS		:= main.c cube.c world.c utils.c ray.c camera.c entities.c assets.c controls.c
+COMPSRCS	:= position.c direction.c control.c
+RENDSRCS	:= renderer.c color.c buffer.c line.c background.c
+SRCS		+= $(addprefix $(COMPDIR), $(COMPSRCS))
+SRCS		+= $(addprefix $(RENDDIR), $(RENDSRCS))
+
+LIBMLX		:= lib/MLX42
+LIBFT		:= lib/libft
+LIBECS		:= lib/ecs
+
+HEADERS		:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include -I $(LIBECS)/include
+LIBS		:= $(LIBECS)/ecs.a $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
+OBJS		:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 
 all: libmlx libft ecs $(NAME)
 
@@ -21,7 +29,7 @@ libft:
 	$(MAKE) -C $(LIBFT)
 
 ecs:
-	$(MAKE) -C $(ECS)
+	$(MAKE) -C $(LIBECS)
 
 $(BINDIR)%.o: $(SRCDDIR)%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
@@ -31,13 +39,14 @@ $(NAME): $(BINDIR) $(OBJS)
 
 $(BINDIR) :
 	mkdir $(BINDIR)
-	mkdir $(BINDIR)/components
+	mkdir $(BINDIR)$(COMPDIR)
+	mkdir $(BINDIR)$(RENDDIR)
 
 clean:
 	@rm -r $(BINDIR)
 	$(MAKE) -C $(LIBFT) fclean
-	$(MAKE) -C $(ECS) fclean
-	@rm -r $(LIBMLX)/build
+	$(MAKE) -C $(LIBECS) fclean
+	@rm -rf $(LIBMLX)/build
 
 fclean: clean
 	@rm -f $(NAME)

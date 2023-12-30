@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:06:31 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 14:56:53 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/12/29 15:19:43 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	assets_load(mlx_t *mlx, int32_t asset, const char *path)
 {
 	mlx_texture_t	*texture;
 
+	(void)mlx;
 	texture = mlx_load_png(path);
 	if (!texture)
 		return ;
