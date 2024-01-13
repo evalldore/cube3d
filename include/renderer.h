@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:22:21 by evallee-          #+#    #+#             */
-/*   Updated: 2023/12/29 19:42:43 by evallee-         ###   ########.fr       */
+/*   Updated: 2023/12/30 04:58:35 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <MLX42/MLX42.h>
 # include "vector.h"
 # include "assets.h"
+# include "camera.h"
 # define RENDERER_H
 # define WIDTH 800
 # define HEIGHT 600
@@ -44,5 +45,6 @@ void		r_draw_line(uint32_t x, int32_t line[], uint32_t len, uint32_t coordx);
 void		r_back_init(mlx_t	*mlx);
 void		r_set_asset(uint32_t index);
 void		r_floor_init(mlx_t *mlx);
+void 		r_floor_draw(uint32_t	color, t_camera ang);
 
 #endif

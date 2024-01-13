@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 19:24:31 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/12 21:46:02 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,7 @@ static void	draw_line(uint32_t x, t_hit result)
 	uint32_t	asset_index;
 	uint32_t	line_h;
 	int32_t		line[2];
-	float		fade;
 
-	fade = fmax(1.0f - (result.dist / 11.0f), 0.0f);
 	asset_index = ASSET_WALL_SOUTH;
 	if (result.norm.x < 0)
 		asset_index = ASSET_WALL_WEST;
@@ -85,9 +83,8 @@ static void	draw_line(uint32_t x, t_hit result)
 	if (line[0] < 0) 
 		line[0] = 0;
 	line[1] = (line_h / 2) + (HEIGHT / 2);
-	if (line[1] >= HEIGHT)
-		line[1] = HEIGHT - 1;
-	r_set_color(255, 0, 0, 255);
+	if (line[1] > HEIGHT)
+		line[1] = HEIGHT;
 	r_set_asset(asset_index);
 	r_draw_line(x, line, line_h, calc_coord(result));
 }
@@ -100,6 +97,7 @@ void	world_draw(t_camera cam)
 	t_ray		ray;
 	t_hit		result;
 
+	r_floor_draw(r_calc_color(255, 0, 0, 255), cam);
 	x = 0;
 	plane = camera_get_plane(cam);
 	dir = camera_get_direction(cam);
@@ -109,7 +107,7 @@ void	world_draw(t_camera cam)
 		ray.pos = cam.pos;
 		ray.dir.x = dir.x + plane.x * cameraX;
 		ray.dir.y = dir.y + plane.y * cameraX;
-		ray.length = DRAW_DISTANCE;
+		ray.length = 8;
 		ray.check = world_is_wall;
 		result = ray_cast(&ray);
 		if (result.collide)
