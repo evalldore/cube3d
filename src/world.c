@@ -6,7 +6,7 @@
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/13 23:46:56 by niceguy          ###   ########.fr       */
+/*   Updated: 2024/01/14 23:51:14 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	world_draw(t_camera cam)
 	t_ray		ray;
 	t_hit		result;
 
-	r_floor_draw(r_calc_color(255, 0, 0, 255), cam);
+	r_floor_draw(r_calc_color(0, 255, 0, 255), cam);
 	x = 0;
 	plane = camera_get_plane(cam);
 	dir = camera_get_direction(cam);
