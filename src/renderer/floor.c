@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   floor.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:34:42 by evallee-          #+#    #+#             */
-/*   Updated: 2024/01/15 00:24:17 by niceguy          ###   ########.fr       */
+/*   Updated: 2024/01/16 17:50:53 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ void r_floor_draw(uint32_t	color, t_camera cam)
 void	r_floor_init(mlx_t *mlx)
 {
 	g_floor = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
-	//r_floor_draw(r_calc_color(0, 0, 255, 255));
 	mlx_image_to_window(mlx, g_floor, 0, HEIGHT / 2);
 }

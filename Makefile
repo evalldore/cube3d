@@ -1,5 +1,5 @@
 NAME		:= cube3d
-CFLAGS		:= -Wall -Wextra -Werror -Ofast -flto -g -fsanitize=address
+CFLAGS		:= -Wall -Wextra -Werror -Ofast -flto
 
 SRCDDIR		:= src/
 BINDIR		:= bin/

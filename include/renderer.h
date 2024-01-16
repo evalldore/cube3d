@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:22:21 by evallee-          #+#    #+#             */
-/*   Updated: 2023/12/30 04:58:35 by niceguy          ###   ########.fr       */
+/*   Updated: 2024/01/16 18:42:16 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDERER_H
+# define RENDERER_H
 # include <stdint.h>
 # include <MLX42/MLX42.h>
 # include "vector.h"
 # include "assets.h"
 # include "camera.h"
-# define RENDERER_H
 # define WIDTH 800
 # define HEIGHT 600
 # define DRAW_DISTANCE 24
+# define SCALE 2
 
 typedef struct s_buffer
 {
