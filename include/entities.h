@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 19:46:28 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 19:22:43 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:03:53 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ void		comp_dir_reg(void);
 
 void		sys_controls(uint32_t ent, va_list args);
 void		sys_controls_keys(mlx_key_data_t keydata, void *param);
+void		sys_controls_mouse(t_fvec move);
+
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/16 18:41:28 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:22:23 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ int32_t	main(int argc, char	**argv)
 	mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
 	if (!mlx)
 		ft_error("mlx failed to init!\n");
+	mlx_set_cursor_mode(mlx, MLX_MOUSE_HIDDEN);
 	mlx_set_window_size(mlx, mlx->width * SCALE, mlx->height * SCALE);
 	mlx_key_hook(mlx, c_keys, NULL);
 	mlx_loop_hook(mlx, &c_tick, mlx);
+	mlx_cursor_hook(mlx, &c_mouse, mlx);
 	c_init(mlx);
 	mlx_loop(mlx);
 	c_exit();

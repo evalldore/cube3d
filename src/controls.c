@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:58:18 by niceguy           #+#    #+#             */
-/*   Updated: 2023/11/08 18:10:00 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:07:04 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,25 @@ void	sys_controls_keys(mlx_key_data_t keydata, void *param)
 			set(keydata.key, ctrl, false);
 		ent++;
 	}
+}
+
+void		sys_controls_mouse(t_fvec move)
+{
+	static t_fvec	last_mouse;
+	t_comp_ctrl		*ctrl;
+	t_comp_dir		*dir;
+	uint32_t		ent;
+
+	ent = 0;
+	while (ent < ecs_num())
+	{
+		ctrl = ecs_comp_get(ent, COMP_CTRL);
+		dir = ecs_comp_get(ent, COMP_DIR);
+		if (ctrl && dir)
+			dir->curr -= deg2rad((last_mouse.x - move.x) * 0.1f);
+		ent++;
+	}
+	last_mouse = move;
 }
 
 static t_fvec	move(t_fvec pos, float dir, float scale, float dt)

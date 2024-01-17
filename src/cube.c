@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 17:45:40 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:19:27 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ void	c_keys(mlx_key_data_t keydata, void *param)
 		return ;
 	}
 	sys_controls_keys(keydata, param);
+}
+
+void	c_mouse(double xpos, double ypos, void* param)
+{
+	sys_controls_mouse((t_fvec){(float)xpos, (float)ypos});
+	mlx_set_mouse_pos(param, (WIDTH * SCALE) / 2, (HEIGHT * SCALE) / 2);
 }
 
 void	c_tick(void *param)
