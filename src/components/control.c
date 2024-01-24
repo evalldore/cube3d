@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:26:59 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 19:22:45 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:03:00 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	control_new(void *ptr, va_list args)
 	ctrl->down = false;
 	ctrl->left = false;
 	ctrl->right = false;
+	ctrl->turn_left = false;
+	ctrl->turn_right = false;
 }
 
 void	comp_ctrl_reg(void)

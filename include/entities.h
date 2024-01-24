@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   entities.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 19:46:28 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/16 22:03:53 by niceguy          ###   ########.fr       */
+/*   Updated: 2024/01/24 16:02:54 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct c_comp_ctrl
 	bool	down;
 	bool	left;
 	bool	right;
+	bool	turn_left;
+	bool	turn_right;
 }	t_comp_ctrl;
 
 typedef struct c_comp_dir

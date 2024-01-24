@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:58:18 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/16 22:07:04 by niceguy          ###   ########.fr       */
+/*   Updated: 2024/01/24 16:56:42 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,23 @@
 #define TURN_SPEED 5
 #define SPEED 5
 
-static bool	set(uint32_t key, t_comp_ctrl *ctrl, bool toggle)
+static void	set(uint32_t key, t_comp_ctrl *ctrl, bool toggle)
 {
+	t_comp_ctrl	last;
+
+	last = *ctrl;
 	if (key == MLX_KEY_W)
-	{
 		ctrl->up = toggle;
-		return (true);
-	}
 	if (key == MLX_KEY_S)
-	{
 		ctrl->down = toggle;
-		return (true);
-	}
 	if (key == MLX_KEY_A)
-	{
 		ctrl->left = toggle;
-		return (true);
-	}
 	if (key == MLX_KEY_D)
-	{
 		ctrl->right = toggle;
-		return (true);
-	}
-	return (false);
+	if (key == MLX_KEY_LEFT)
+		ctrl->turn_left = toggle;
+	if (key == MLX_KEY_RIGHT)
+		ctrl->turn_right = toggle;
 }
 
 void	sys_controls_keys(mlx_key_data_t keydata, void *param)
@@ -60,41 +54,44 @@ void	sys_controls_keys(mlx_key_data_t keydata, void *param)
 	}
 }
 
-void		sys_controls_mouse(t_fvec move)
+void	sys_controls_mouse(t_fvec move)
 {
 	static t_fvec	last_mouse;
 	t_comp_ctrl		*ctrl;
 	t_comp_dir		*dir;
 	uint32_t		ent;
 
+	if (last_mouse.x == 0.0f && last_mouse.y == 0.0f)
+		last_mouse = move;
 	ent = 0;
 	while (ent < ecs_num())
 	{
 		ctrl = ecs_comp_get(ent, COMP_CTRL);
 		dir = ecs_comp_get(ent, COMP_DIR);
 		if (ctrl && dir)
-			dir->curr -= deg2rad((last_mouse.x - move.x) * 0.1f);
+			dir->curr -= deg2rad((last_mouse.x - move.x) * 0.05f);
 		ent++;
 	}
 	last_mouse = move;
 }
 
-static t_fvec	move(t_fvec pos, float dir, float scale, float dt)
+static t_fvec	move(t_fvec pos, float dir, t_fvec input, float dt)
 {
 	t_uvec	check;
+	t_fvec	vel;
 
-	check.x = (uint32_t)(pos.x + cos(dir) * (0.5f * scale));
-	check.y = (uint32_t)pos.y;
+	vel.x = (cos(dir) * SPEED * dt) * input.y;
+	vel.y = (sin(dir) * SPEED * dt) * input.y;
+	vel.x += (cos(dir + deg2rad(90.0f)) * SPEED * dt) * input.x;
+	vel.y += (sin(dir + deg2rad(90.0f)) * SPEED * dt) * input.x;
+	check.x = (uint32_t)(pos.x + cos(dir) * (0.5f * input.y));
+	check.y = (uint32_t)(pos.y + sin(dir + deg2rad(90.0f)) * (0.5f * input.x));
 	if (world_is_wall(check) == 0)
-		pos.x += (cos(dir) * SPEED * dt) * scale;
-	check.x = (uint32_t)pos.x;
-	check.y = (uint32_t)(pos.y + sin(dir) * (0.5f * scale));
+		pos.x += vel.x;
+	check.x = (uint32_t)(pos.x + cos(dir + deg2rad(90.0f)) * (0.5f * input.x));
+	check.y = (uint32_t)(pos.y + sin(dir) * (0.5f * input.y));
 	if (world_is_wall(check) == 0)
-		pos.y += (sin(dir) * SPEED * dt) * scale;
-	if (pos.x < 0.0f)
-		pos.x = 0.0f;
-	if (pos.y < 0.0f)
-		pos.y = 0.0f;
+		pos.y += vel.y;
 	return (pos);
 }
 
@@ -104,6 +101,7 @@ void	sys_controls(uint32_t ent, va_list args)
 	t_comp_ctrl		*ctrl;
 	t_comp_pos		*pos;
 	t_comp_dir		*dir;
+	t_fvec			input;
 
 	mlx = va_arg(args, void *);
 	ctrl = ecs_comp_get(ent, COMP_CTRL);
@@ -111,12 +109,13 @@ void	sys_controls(uint32_t ent, va_list args)
 	dir = ecs_comp_get(ent, COMP_DIR);
 	if (!ctrl || !pos || !dir)
 		return ;
-	if (ctrl->up)
-		pos->curr = move(pos->curr, dir->curr, 1.0, mlx->delta_time);
-	if (ctrl->down)
-		pos->curr = move(pos->curr, dir->curr, -1.0, mlx->delta_time);
-	if (ctrl->right)
+	input.x = -1.0f * (float)ctrl->left;
+	input.x += 1.0f * (float)ctrl->right;
+	input.y = -1.0f * (float)ctrl->down;
+	input.y += 1.0f * (float)ctrl->up;
+	pos->curr = move(pos->curr, dir->curr, input, mlx->delta_time);
+	if (ctrl->turn_right)
 		dir->curr = rotate(dir->curr, TURN_SPEED * mlx->delta_time);
-	if (ctrl->left)
+	else if (ctrl->turn_left)
 		dir->curr = rotate(dir->curr, -TURN_SPEED * mlx->delta_time);
 }
