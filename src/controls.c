@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:58:18 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/24 16:56:42 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:23:22 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,20 @@ static t_fvec	move(t_fvec pos, float dir, t_fvec input, float dt)
 {
 	t_uvec	check;
 	t_fvec	vel;
+	t_fvec	dir_vec[2];
 
-	vel.x = (cos(dir) * SPEED * dt) * input.y;
-	vel.y = (sin(dir) * SPEED * dt) * input.y;
-	vel.x += (cos(dir + deg2rad(90.0f)) * SPEED * dt) * input.x;
-	vel.y += (sin(dir + deg2rad(90.0f)) * SPEED * dt) * input.x;
-	check.x = (uint32_t)(pos.x + cos(dir) * (0.5f * input.y));
-	check.y = (uint32_t)(pos.y + sin(dir + deg2rad(90.0f)) * (0.5f * input.x));
+	dir_vec[0] = (t_fvec){cos(dir), sin(dir)};
+	dir_vec[1] = (t_fvec){cos(dir + deg2rad(90.0f)), sin(dir + deg2rad(90.0f))};
+	vel.x = (dir_vec[0].x * SPEED * dt) * input.y;
+	vel.y = (dir_vec[0].y * SPEED * dt) * input.y;
+	vel.x += (dir_vec[1].x * SPEED * dt) * input.x;
+	vel.y += (dir_vec[1].y * SPEED * dt) * input.x;
+	check.x = (uint32_t)(pos.x + dir_vec[0].x * (0.5f * input.y));
+	check.y = (uint32_t)pos.y;
 	if (world_is_wall(check) == 0)
 		pos.x += vel.x;
-	check.x = (uint32_t)(pos.x + cos(dir + deg2rad(90.0f)) * (0.5f * input.x));
-	check.y = (uint32_t)(pos.y + sin(dir) * (0.5f * input.y));
+	check.x = (uint32_t)pos.x;
+	check.y = (uint32_t)(pos.y + dir_vec[0].y * (0.5f * input.y));
 	if (world_is_wall(check) == 0)
 		pos.y += vel.y;
 	return (pos);
