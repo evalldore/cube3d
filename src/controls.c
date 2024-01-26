@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:58:18 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/26 15:58:57 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:57:00 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static t_fvec	move(t_fvec pos, float dir, t_fvec input, float dt)
 
 	vel_dir.x = cos(dir) * input.y + cos(dir + deg2rad(90.0f)) * input.x;
 	vel_dir.y = sin(dir) * input.y + sin(dir + deg2rad(90.0f)) * input.x;
+	vel_dir = normalize(vel_dir.x, vel_dir.y);
 	coll_res = collision_check(pos, vel_dir);
 	if (coll_res.x == 0)
 		pos.x += vel_dir.x * SPEED * dt;

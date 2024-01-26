@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:42:38 by niceguy           #+#    #+#             */
-/*   Updated: 2023/08/25 13:56:56 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:56:27 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,20 @@ int	sign(float value)
 	else if (value < 0.0f)
 		return (-1);
 	return (0);
+}
+
+t_fvec	normalize(float x, float y)
+{
+	double	l;
+	t_fvec	norm;
+
+	norm.x = 0.0f;
+	norm.y = 0.0f;
+	l = sqrt((double)((x * x) + (y * y)));
+	if (l != 0.0)
+	{
+		norm.x = x / l;
+		norm.y = y / l;
+	}
+	return (norm);
 }
