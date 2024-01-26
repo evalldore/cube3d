@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:58:18 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/24 17:23:22 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:44:34 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "entities.h"
 #include "utils.h"
 #include "world.h"
+#include "collision.h"
 #define TURN_SPEED 5
 #define SPEED 5
 
@@ -77,24 +78,21 @@ void	sys_controls_mouse(t_fvec move)
 
 static t_fvec	move(t_fvec pos, float dir, t_fvec input, float dt)
 {
-	t_uvec	check;
-	t_fvec	vel;
+	t_ivec	coll_res;
+	t_fvec	vel_dir;
 	t_fvec	dir_vec[2];
 
 	dir_vec[0] = (t_fvec){cos(dir), sin(dir)};
 	dir_vec[1] = (t_fvec){cos(dir + deg2rad(90.0f)), sin(dir + deg2rad(90.0f))};
-	vel.x = (dir_vec[0].x * SPEED * dt) * input.y;
-	vel.y = (dir_vec[0].y * SPEED * dt) * input.y;
-	vel.x += (dir_vec[1].x * SPEED * dt) * input.x;
-	vel.y += (dir_vec[1].y * SPEED * dt) * input.x;
-	check.x = (uint32_t)(pos.x + dir_vec[0].x * (0.5f * input.y));
-	check.y = (uint32_t)pos.y;
-	if (world_is_wall(check) == 0)
-		pos.x += vel.x;
-	check.x = (uint32_t)pos.x;
-	check.y = (uint32_t)(pos.y + dir_vec[0].y * (0.5f * input.y));
-	if (world_is_wall(check) == 0)
-		pos.y += vel.y;
+	vel_dir.x = dir_vec[0].x * input.y;
+	vel_dir.y = dir_vec[0].y * input.y;
+	vel_dir.x += dir_vec[1].x * input.x;
+	vel_dir.y += dir_vec[1].y * input.x;
+	coll_res = collision_check(pos, vel_dir);
+	if (coll_res.x == 0)
+		pos.x += vel_dir.x * SPEED * dt;
+	if (coll_res.y == 0)
+		pos.y += vel_dir.y * SPEED * dt;
 	return (pos);
 }
 
