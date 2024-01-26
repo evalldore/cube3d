@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:58:18 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/26 15:44:34 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:58:57 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,9 @@ static t_fvec	move(t_fvec pos, float dir, t_fvec input, float dt)
 {
 	t_ivec	coll_res;
 	t_fvec	vel_dir;
-	t_fvec	dir_vec[2];
 
-	dir_vec[0] = (t_fvec){cos(dir), sin(dir)};
-	dir_vec[1] = (t_fvec){cos(dir + deg2rad(90.0f)), sin(dir + deg2rad(90.0f))};
-	vel_dir.x = dir_vec[0].x * input.y;
-	vel_dir.y = dir_vec[0].y * input.y;
-	vel_dir.x += dir_vec[1].x * input.x;
-	vel_dir.y += dir_vec[1].y * input.x;
+	vel_dir.x = cos(dir) * input.y + cos(dir + deg2rad(90.0f)) * input.x;
+	vel_dir.y = sin(dir) * input.y + sin(dir + deg2rad(90.0f)) * input.x;
 	coll_res = collision_check(pos, vel_dir);
 	if (coll_res.x == 0)
 		pos.x += vel_dir.x * SPEED * dt;
