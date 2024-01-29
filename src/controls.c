@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 20:58:18 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/26 16:57:00 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/01/28 23:19:21 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 
 static void	set(uint32_t key, t_comp_ctrl *ctrl, bool toggle)
 {
-	t_comp_ctrl	last;
-
-	last = *ctrl;
 	if (key == MLX_KEY_W)
 		ctrl->up = toggle;
 	if (key == MLX_KEY_S)
