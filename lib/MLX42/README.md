@@ -7,9 +7,6 @@
     <div align="center">
 	</br>
 	<img src="https://img.shields.io/github/license/codam-coding-college/MLX42" alt="License GPL2.0"> 
-	<img src="https://svgshare.com/i/Zhy.svg" alt="Linux">
-	<img src="https://svgshare.com/i/ZjP.svg" alt="MacOS">
-	<img src="https://svgshare.com/i/ZhY.sv" alt="Windows">
 	<img src="https://github.com/codam-coding-college/MLX42/actions/workflows/ci.yml/badge.svg" alt="Build">
 	<img src="https://img.shields.io/github/forks/codam-coding-college/MLX42" alt="Forks">
     </div>
@@ -45,7 +42,7 @@ This project is being actively maintained by Codam as well as students from the 
 ---
 
 ## Installation 🏗️
-### General compilation. 
+### General compilation
 
 Overall the building of this project is as follows for ALL systems. As long as CMake can make sense of it.
 
@@ -61,12 +58,21 @@ However if you can't do either CMake will still be able to fetch GLFW and build 
 
 > **Note**: During the linking stage, the flag to link GLFW can either be: -lglfw3 or -lglfw depending on your system.
 
-2. Compile your program with the library:
+1. Compile your program with the library:
 	- For: [MacOS](#for-macos)
 	- For: [Linux](#for-linux)
 	- For: [Windows](#for-windows)
 
-3. Profit!
+2. Profit!
+
+### Installing to the system
+
+To fully build the library and install it to your system run the following command:
+```bash
+cmake -B build && cmake --build build --parallel --config (Debug|Release|RelWithDebInfo|MinSizeRel) --target install
+```
+
+By default windows will place the installed lib into: `C:\Program Files (x86)\mlx42` and for MacOS / Linux it will be placed into `/usr/local/lib` and `/usr/local/include` respectively.
 
 ### Unit tests
 MLX42 comes with some unit tests to ensure the integrity of the library, to build them run the following command:
@@ -84,10 +90,10 @@ ctest --output-on-failure --test-dir build
 ## Download and build - MLX42
 
 ```bash 
-➜  ~ git clone https://github.com/codam-coding-college/MLX42.git
-➜  ~ cd MLX42
-➜  ~ cmake -B build # build here refers to the outputfolder.
-➜  ~ cmake --build build -j4 # or do make -C build -j4
+git clone https://github.com/codam-coding-college/MLX42.git
+cd MLX42
+cmake -B build # build here refers to the outputfolder.
+cmake --build build -j4 # or do make -C build -j4
 ```
 
 The output library file is called `libmlx42.a` and is located in the `build` folder that you specified.
@@ -107,11 +113,19 @@ You can find an example makefile in the documentation [here](https://github.com/
 If your system has neither GLFW nor CMake its highly recommended you use brew to install those missing dependencies.
 
 For 42 Campuses you can use: [42Homebrew](https://github.com/kube/42homebrew)
+
+Otherwise with homebrew:
 ```bash
-# This will also install CMake.
-# Be aware that this may take a while so be patient.
-➜  ~ brew install glfw
+brew install glfw
+brew install cmake
 ```
+If you are using Apple Silicon (M1 chip or later), note that the Homebrew install path is different.
+You may want to update your shell configuration file. For Zsh users (default shell on newer macOS versions):
+```bash
+nano ~/.zshrc
+export LIBRARY_PATH=/opt/homebrew/lib
+```
+Restart your shell session or restart your terminal for the changes to take effect.
 
 For MacOS you need to use the following flags to compile your program with the library
 in order to link the program with the correct frameworks:
@@ -122,16 +136,16 @@ in order to link the program with the correct frameworks:
 Normally if you simply installed / built `glfw` from source or already have it installed
 the compilation should be:
 ```bash
-➜  ~ gcc main.c ... libmlx42.a -Iinclude -lglfw
+gcc main.c ... libmlx42.a -Iinclude -lglfw
 ```
 
 #### Via [Homebrew](https://brew.sh/) / [42Homebrew](https://github.com/kube/42homebrew)
 ```bash
 # Homebrew
-➜  ~ gcc main.c ... libmlx42.a -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
+gcc main.c ... libmlx42.a -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
 
 # 42Homebrew
-➜  ~ gcc main.c ... libmlx42.a -Iinclude -lglfw -L"/Users/$USER/.brew/opt/glfw/lib/"
+gcc main.c ... libmlx42.a -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 ```
 
 #### MacOS Security:
@@ -149,18 +163,18 @@ There will be a pop-up at the bottom telling you that an application tried to ru
 
 For Debian like (Ubuntu, Mint, Pop OS...):
 ```bash 
-➜  ~ sudo apt update
-➜  ~ sudo apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
+sudo apt update
+sudo apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
 ```
 
 For Arch-linux (Manjaro, Endeavor, Garuda):
 ```bash
-➜  ~ sudo pacman -S glfw-x11
+sudo pacman -S glfw-x11
 ```
 OR (if you use sway/wlroots compositor or other wayland compositor)
 
 ```bash
-➜  ~ sudo pacman -S glfw-wayland
+sudo pacman -S glfw-wayland
 ```
 
 2. [Download and build MLX42](#download-and-build---mlx42) 
@@ -168,13 +182,15 @@ OR (if you use sway/wlroots compositor or other wayland compositor)
 3. Compile your program with the library:
 
 ```bash
-➜  ~ gcc main.c ... libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+gcc main.c ... libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
 ```
 4. Profit!
 
 ----
 
 ## For Windows (with Windows Subsystem for Linux 2 (WSL2))
+
+> **Warning**: Before starting with all these steps, [read this](https://learn.microsoft.com/en-us/windows/wsl/tutorials/gui-apps)
 
 1. Set these variables in your `.zshrc` or `.bashrc`:
 ```bash
@@ -252,9 +268,10 @@ int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 
 void ft_randomize(void* param)
 {
-	for (int32_t i = 0; i < image->width; ++i)
+	(void)param;
+	for (uint32_t i = 0; i < image->width; ++i)
 	{
-		for (int32_t y = 0; y < image->height; ++y)
+		for (uint32_t y = 0; y < image->height; ++y)
 		{
 			uint32_t color = ft_pixel(
 				rand() % 0xFF, // R
@@ -285,7 +302,7 @@ void ft_hook(void* param)
 
 // -----------------------------------------------------------------------------
 
-int32_t main(int32_t argc, const char* argv[])
+int32_t main(void)
 {
 	mlx_t* mlx;
 

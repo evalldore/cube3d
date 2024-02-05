@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:01:49 by niceguy           #+#    #+#             */
-/*   Updated: 2023/11/23 17:24:17 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/05 02:31:41 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,7 @@ static t_hit	ray_loop(t_ray *r, t_uvec check, t_fvec step, t_fvec length)
 	hit.dist = 0.0f;
 	while (!r->check(check) && i++ <= r->length)
 	{
-		hit.norm.x = 0;
-		hit.norm.y = 0;
+		hit.norm = (t_ivec){0, 0};
 		if (length.x < length.y) 
 		{
 			hit.norm.x = sign(r->dir.x);
