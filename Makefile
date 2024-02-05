@@ -5,12 +5,16 @@ SRCDDIR		:= src/
 BINDIR		:= bin/
 COMPDIR 	:= components/
 RENDDIR		:= renderer/
+WORLDDIR	:= world/
+MODULEDIR	:= $(COMPDIR) $(RENDDIR) $(WORLDDIR) 
 
-SRCS		:= main.c cube.c world.c utils.c ray.c camera.c entities.c assets.c controls.c collision.c vector.c exit.c
+SRCS		:= main.c cube.c utils.c ray.c camera.c entities.c assets.c controls.c collision.c vector.c
 COMPSRCS	:= position.c direction.c control.c
 RENDSRCS	:= renderer.c color.c buffer.c line.c background.c floor.c
+WORLDSRCS	:= world.c
 SRCS		+= $(addprefix $(COMPDIR), $(COMPSRCS))
 SRCS		+= $(addprefix $(RENDDIR), $(RENDSRCS))
+SRCS		+= $(addprefix $(WORLDDIR), $(WORLDSRCS))
 
 LIBMLX		:= lib/MLX42
 LIBFT		:= lib/libft
@@ -39,8 +43,7 @@ $(NAME): $(BINDIR) $(OBJS)
 
 $(BINDIR) :
 	mkdir $(BINDIR)
-	mkdir $(BINDIR)$(COMPDIR)
-	mkdir $(BINDIR)$(RENDDIR)
+	mkdir $(addprefix $(BINDIR), $(MODULEDIR))
 
 clean:
 	@rm -r $(BINDIR)
