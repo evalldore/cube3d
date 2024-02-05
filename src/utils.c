@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:42:38 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/26 16:56:27 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/04 23:21:48 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 
 float	dist(float x1, float y1, float x2, float y2)
 {
-	float	dist_x;
-	float	dist_y;
+	t_fvec	dist;
 
-	dist_x = (x2 - x1);
-	dist_y = (y2 - y1);
-	return (sqrt((dist_x * dist_x) + (dist_y * dist_y)));
+	dist = (t_fvec){x2 - x1, y2 - y1};
+	return (sqrt((dist.x * dist.x) + (dist.y * dist.y)));
 }
 
 float	deg2rad(float a)
@@ -47,18 +45,3 @@ int	sign(float value)
 	return (0);
 }
 
-t_fvec	normalize(float x, float y)
-{
-	double	l;
-	t_fvec	norm;
-
-	norm.x = 0.0f;
-	norm.y = 0.0f;
-	l = sqrt((double)((x * x) + (y * y)));
-	if (l != 0.0)
-	{
-		norm.x = x / l;
-		norm.y = y / l;
-	}
-	return (norm);
-}

@@ -6,7 +6,7 @@ BINDIR		:= bin/
 COMPDIR 	:= components/
 RENDDIR		:= renderer/
 
-SRCS		:= main.c cube.c world.c utils.c ray.c camera.c entities.c assets.c controls.c collision.c
+SRCS		:= main.c cube.c world.c utils.c ray.c camera.c entities.c assets.c controls.c collision.c vector.c
 COMPSRCS	:= position.c direction.c control.c
 RENDSRCS	:= renderer.c color.c buffer.c line.c background.c floor.c
 SRCS		+= $(addprefix $(COMPDIR), $(COMPSRCS))

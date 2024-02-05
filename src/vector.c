@@ -1,44 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 01:14:42 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/04 23:24:19 by niceguy          ###   ########.fr       */
+/*   Created: 2024/02/04 23:22:32 by niceguy           #+#    #+#             */
+/*   Updated: 2024/02/04 23:24:13 by niceguy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTOR_H
-# define VECTOR_H
-# include <stdint.h>
-# include <math.h>
+#include "vector.h"
 
-typedef struct s_ivector
+t_fvec fvec_normalize(t_fvec vec)
 {
-	int32_t		x;
-	int32_t		y;
-}	t_ivec;
+	double	l;
+	t_fvec	norm;
 
-typedef struct s_uvector
-{
-	uint32_t	x;
-	uint32_t	y;
-}	t_uvec;
-
-typedef struct s_dvector
-{
-	double	x;
-	double	y;
-}	t_dvec;
-
-typedef struct s_fvector
-{
-	float	x;
-	float	y;
-}	t_fvec;
-
-t_fvec	fvec_normalize(t_fvec vec);
-
-#endif
+	norm = (t_fvec){0.0f, 0.0f};
+	l = sqrt((double)((vec.x * vec.x) + (vec.y * vec.y)));
+	if (l != 0.0)
+	{
+		norm.x = vec.x / l;
+		norm.y = vec.y / l;
+	}
+	return (norm);
+}
