@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/24 15:27:45 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/05 16:54:55 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int32_t	main(int argc, char	**argv)
 	mlx_cursor_hook(mlx, &c_mouse, mlx);
 	c_init(mlx);
 	mlx_loop(mlx);
-	c_exit();
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
