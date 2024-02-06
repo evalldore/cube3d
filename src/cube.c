@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/05 18:11:46 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:37:01 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 
 static uint32_t	g_player;
 
-bool	c_init(void *params)
+bool	c_init(void *params, char *path)
 {
-	assets_init(params);
+	if (!world_init(params, path))
+		return (false);
 	r_init(params);
 	ents_init();
 	g_player = ents_player((t_fvec){2.0f, 2.0f}, 0.0f);
@@ -64,5 +65,6 @@ void	c_tick(void *param)
 
 void	c_exit(void)
 {
-	printf("what\n");
+	ecs_remove(g_player);
+	printf("exitting cub3D\n");
 }

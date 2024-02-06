@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:06:31 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 15:19:43 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:54:40 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 static mlx_texture_t	*g_assets[MAX_ASSETS];
 
-static void	assets_load(mlx_t *mlx, int32_t asset, const char *path)
+static bool	assets_load(mlx_t *mlx, int32_t asset, const char *path)
 {
 	mlx_texture_t	*texture;
 
 	(void)mlx;
 	texture = mlx_load_png(path);
 	if (!texture)
-		return ;
+		return (false);
 	g_assets[asset] = texture;
+	return (true);
 }
 
 mlx_texture_t	*assets_get(int32_t	asset)
@@ -32,10 +33,15 @@ mlx_texture_t	*assets_get(int32_t	asset)
 	return (g_assets[asset]);
 }
 
-void	assets_init(mlx_t *mlx)
+bool	assets_init(mlx_t *mlx, char *paths[])
 {
-	assets_load(mlx, ASSET_WALL_NORTH, "assets/mossy.png");
-	assets_load(mlx, ASSET_WALL_EAST, "assets/bluestone.png");
-	assets_load(mlx, ASSET_WALL_SOUTH, "assets/greystone.png");
-	assets_load(mlx, ASSET_WALL_WEST, "assets/purplestone.png");
+	if (!assets_load(mlx, ASSET_WALL_NORTH, paths[0]))
+		return (false);
+	if (!assets_load(mlx, ASSET_WALL_EAST, paths[1]))
+		return (false);
+	if (!assets_load(mlx, ASSET_WALL_SOUTH, paths[2]))
+		return (false);
+	if (!assets_load(mlx, ASSET_WALL_WEST, paths[3]))
+		return (false);
+	return (true);
 }

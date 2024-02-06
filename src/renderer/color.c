@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 16:34:27 by evallee-          #+#    #+#             */
-/*   Updated: 2024/01/24 16:55:24 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:22:32 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,7 @@ void	r_set_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 
 uint32_t	r_calc_color(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
 {
-	uint32_t	c;
-
-	c = r;
-	c = (c << 8) | g;
-	c = (c << 8) | b;
-	c = (c << 8) | a;
-	return (c);
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
 uint32_t	r_get_pixel(mlx_texture_t *texture, int x, int y)

@@ -11,7 +11,7 @@ MODULEDIR	:= $(COMPDIR) $(RENDDIR) $(WORLDDIR)
 SRCS		:= main.c cube.c utils.c ray.c camera.c entities.c assets.c controls.c collision.c vector.c
 COMPSRCS	:= position.c direction.c control.c
 RENDSRCS	:= renderer.c color.c buffer.c line.c background.c floor.c
-WORLDSRCS	:= world.c
+WORLDSRCS	:= world.c draw.c
 SRCS		+= $(addprefix $(COMPDIR), $(COMPSRCS))
 SRCS		+= $(addprefix $(RENDDIR), $(RENDSRCS))
 SRCS		+= $(addprefix $(WORLDDIR), $(WORLDSRCS))
@@ -25,6 +25,9 @@ LIBS		:= $(LIBECS)/ecs.a $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw
 OBJS		:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 
 all: libmlx libft ecs $(NAME)
+
+leaks:
+	leaks --atExit -- ./$(NAME)
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4

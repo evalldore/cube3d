@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/05 18:11:35 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:50:53 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include "renderer.h"
 
 // Exit the program as failure.
-static void	ft_error(char *err)
+static void	ft_error(const char *err)
 {
 	if (err)
-		ft_printf(err);
+		write(2, err, ft_strlen(err));
 	exit(EXIT_FAILURE);
 }
 
@@ -26,8 +26,8 @@ int32_t	main(int argc, char	**argv)
 {
 	mlx_t	*mlx;
 
-	(void)argc;
-	(void)argv;
+	if (argc < 2)
+		ft_error("Not enough arguments!\n");
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
 	if (!mlx)
@@ -37,7 +37,11 @@ int32_t	main(int argc, char	**argv)
 	mlx_key_hook(mlx, c_keys, mlx);
 	mlx_loop_hook(mlx, &c_tick, mlx);
 	mlx_cursor_hook(mlx, &c_mouse, mlx);
-	c_init(mlx);
+	if (!c_init(mlx, argv[1]))
+	{
+		mlx_terminate(mlx);
+		return (EXIT_FAILURE);
+	}
 	mlx_loop(mlx);
 	c_exit();
 	mlx_terminate(mlx);

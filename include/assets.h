@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:07:51 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 14:39:30 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:55:10 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ enum	e_asset
 };
 
 mlx_texture_t	*assets_get(int32_t	asset);
-void			assets_init(mlx_t *mlx);
+bool			assets_init(mlx_t *mlx, char *paths[]);
 
 #endif
