@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/06 17:37:01 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:29:56 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@
 #include "world.h"
 #include "camera.h"
 #include "assets.h"
+#include "utils.h"
 
 static uint32_t	g_player;
 
 bool	c_init(void *params, char *path)
 {
+	t_world	*world;
 	if (!world_init(params, path))
 		return (false);
+	world = world_get();
 	r_init(params);
 	ents_init();
-	g_player = ents_player((t_fvec){2.0f, 2.0f}, 0.0f);
+	g_player = ents_player(world->start.coords, deg2rad(world->start.dir));
 	return (true);
 }
 

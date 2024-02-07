@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/06 18:05:01 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:31:57 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ bool	world_init(mlx_t *mlx, char *path)
 
 	(void)path;
 	world = world_get();
+	world->start.coords = (t_fvec){2.0f, 2.0f};
+	world->start.dir = 270.0f;
 	world->size.x = 16;
 	world->size.y = 16;
 	world->colors[0] = r_calc_color(100, 100, 25, 255);

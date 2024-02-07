@@ -8,7 +8,7 @@
 # include "camera.h"
 
 typedef struct s_start {
-	t_uvec	coords;
+	t_fvec	coords;
 	float	dir;
 }	t_start;
 
