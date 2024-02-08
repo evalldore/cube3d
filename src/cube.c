@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/07 15:29:56 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/08 17:04:20 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,19 @@
 #include "camera.h"
 #include "assets.h"
 #include "utils.h"
+#include "radar.h"
 
 static uint32_t	g_player;
 
-bool	c_init(void *params, char *path)
+bool	c_init(mlx_t *mlx, char *path)
 {
 	t_world	*world;
-	if (!world_init(params, path))
+	if (!world_init(mlx, path))
 		return (false);
 	world = world_get();
-	r_init(params);
+	r_init(mlx);
 	ents_init();
+	radar_init(mlx);
 	g_player = ents_player(world->start.coords, deg2rad(world->start.dir));
 	return (true);
 }
@@ -64,6 +66,7 @@ void	c_tick(void *param)
 	cam.pos = pos->curr;
 	cam.angle = dir->curr;
 	world_draw(cam);
+	radar_draw(pos->curr);
 }
 
 void	c_exit(void)

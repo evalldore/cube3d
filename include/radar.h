@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube.h                                             :+:      :+:    :+:   */
+/*   radar.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 03:08:10 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/08 16:49:37 by evallee-         ###   ########.fr       */
+/*   Created: 2024/02/08 15:29:19 by evallee-          #+#    #+#             */
+/*   Updated: 2024/02/08 17:32:05 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE_H
-# define CUBE_H
+#ifndef RADAR_H
+# define RADAR_H
 # include <MLX42/MLX42.h>
+# include "world.h"
+# include "vector.h"
+# include "renderer.h"
+# include "libft.h"
+# define UNIT_SIZE 4
 
-bool		c_init(mlx_t *mlx, char *path);
-void		c_keys(mlx_key_data_t keydata, void *params);
-void		c_tick(void *params);
-void		c_mouse(double xpos, double ypos, void* param);
-void		c_exit(void);
+void	radar_init(mlx_t *mlx);
+void	radar_draw(t_fvec pos);
 
 #endif
