@@ -6,11 +6,11 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 01:41:58 by evallee-          #+#    #+#             */
-/*   Updated: 2023/05/11 16:41:45 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:30:24 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 int	ft_tolower(int c)
 {
