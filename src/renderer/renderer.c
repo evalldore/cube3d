@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 19:58:35 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 19:43:04 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:42:24 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ void	r_init(void	*param)
 	mlx_image_to_window(param, frame, 0, 0);
 	buffer->frame = frame;
 }
-

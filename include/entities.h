@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 19:46:28 by niceguy           #+#    #+#             */
-/*   Updated: 2024/01/24 16:02:54 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:06:26 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ void		comp_dir_reg(void);
 void		sys_controls(uint32_t ent, va_list args);
 void		sys_controls_keys(mlx_key_data_t keydata, void *param);
 void		sys_controls_mouse(t_fvec move);
-
 
 #endif

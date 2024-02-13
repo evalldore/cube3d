@@ -6,11 +6,11 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:01:43 by evallee-          #+#    #+#             */
-/*   Updated: 2023/11/22 18:54:42 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:07:59 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	RAY_H
+#ifndef RAY_H
 # define RAY_H
 # include <stdbool.h>
 # include "vector.h"

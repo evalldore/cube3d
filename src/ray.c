@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niceguy <niceguy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:01:49 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/05 02:31:41 by niceguy          ###   ########.fr       */
+/*   Updated: 2024/02/13 15:37:34 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	ray_init(t_ray *r, t_uvec *check, t_fvec *step, t_fvec *length)
 		step->y = fabs(1.0f / r->dir.y);
 	length->x = ((float)(check->x + 1) - r->pos.x) * step->x;
 	length->y = ((float)(check->y + 1) - r->pos.y) * step->y;
-	if (r->dir.x < 0) 
+	if (r->dir.x < 0)
 		length->x = (r->pos.x - (float)check->x) * step->x;
-	if (r->dir.y < 0) 
+	if (r->dir.y < 0)
 		length->y = (r->pos.y - (float)check->y) * step->y;
 }
 
@@ -42,7 +42,7 @@ static t_hit	ray_loop(t_ray *r, t_uvec check, t_fvec step, t_fvec length)
 	while (!r->check(check) && i++ <= r->length)
 	{
 		hit.norm = (t_ivec){0, 0};
-		if (length.x < length.y) 
+		if (length.x < length.y)
 		{
 			hit.norm.x = sign(r->dir.x);
 			check.x += hit.norm.x;

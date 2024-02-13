@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/08 17:04:20 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:33:23 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static uint32_t	g_player;
 bool	c_init(mlx_t *mlx, char *path)
 {
 	t_world	*world;
+
 	if (!world_init(mlx, path))
 		return (false);
 	world = world_get();
@@ -39,11 +40,11 @@ bool	c_init(mlx_t *mlx, char *path)
 
 void	c_keys(mlx_key_data_t keydata, void *param)
 {
-	mlx_t*		mlx;
+	mlx_t	*mlx;
 
 	mlx = param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		return mlx_close_window(mlx);
+		return (mlx_close_window(mlx));
 	sys_controls_keys(keydata, param);
 }
 

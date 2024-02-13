@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:32:45 by evallee-          #+#    #+#             */
-/*   Updated: 2024/02/06 16:45:07 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:04:14 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,18 @@ static void	draw_line(uint32_t x, t_hit result)
 		asset_index = ASSET_WALL_NORTH;
 	line_h = (int)(HEIGHT / result.dist);
 	line[0] = -(line_h / 2) + (HEIGHT / 2);
-	if (line[0] < 0) 
+	if (line[0] < 0)
 		line[0] = 0;
 	line[1] = (line_h / 2) + (HEIGHT / 2);
 	if (line[1] > HEIGHT)
 		line[1] = HEIGHT;
 	r_set_asset(asset_index);
 	r_draw_line(x, line, line_h, calc_coord(result));
+}
+
+static float	calc_x(float x)
+{
+	return (2.0f * (x / WIDTH) - 1.0f);
 }
 
 void	world_draw(t_camera cam)
@@ -60,16 +65,15 @@ void	world_draw(t_camera cam)
 	t_ray		ray;
 	t_hit		result;
 
-	r_floor_draw(world_get()->colors[0], cam);
+	r_floor_draw(cam);
 	plane = camera_get_plane(cam);
 	dir = camera_get_direction(cam);
 	x = 0;
 	while (x < WIDTH)
 	{
-		float cameraX = 2.0f * ((float)x / WIDTH) - 1.0f;
 		ray.pos = cam.pos;
-		ray.dir.x = dir.x + plane.x * cameraX;
-		ray.dir.y = dir.y + plane.y * cameraX;
+		ray.dir.x = dir.x + plane.x * calc_x((float)x);
+		ray.dir.y = dir.y + plane.y * calc_x((float)x);
 		ray.length = DRAW_DISTANCE;
 		ray.check = world_is_wall;
 		result = ray_cast(&ray);
