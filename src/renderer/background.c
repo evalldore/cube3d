@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:17:15 by evallee-          #+#    #+#             */
-/*   Updated: 2024/02/06 18:17:34 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:58:51 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static uint32_t	calc_shade(uint32_t coordy, uint32_t colors[])
 	grad_col[1] = (uint8_t *)&colors[1];
 	shade_mul = (float)coordy / (float)((HEIGHT / 2) - 1);
 	rev_shade_mul = (float)fmax(1.0f - shade_mul, 0.0);
-	result[0] = rev_shade_mul * grad_col[0][0] + (shade_mul * grad_col[1][0]);
-	result[1] = rev_shade_mul * grad_col[0][1] + (shade_mul * grad_col[1][1]);
-	result[2] = rev_shade_mul * grad_col[0][2] + (shade_mul * grad_col[1][2]);
+	result[0] = rev_shade_mul * grad_col[0][3] + (shade_mul * grad_col[1][3]);
+	result[1] = rev_shade_mul * grad_col[0][2] + (shade_mul * grad_col[1][2]);
+	result[2] = rev_shade_mul * grad_col[0][1] + (shade_mul * grad_col[1][1]);
 	result[3] = 255;
 	return (r_calc_color(result[0], result[1], result[2], result[3]));
 }
