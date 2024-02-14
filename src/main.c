@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/08 16:49:56 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:15:03 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	ft_error(const char *err)
 int32_t	main(int argc, char	**argv)
 {
 	mlx_t	*mlx;
+	t_uvec	size;
 
 	if (argc < 2)
 		ft_error("Not enough arguments!\n");
@@ -33,7 +34,9 @@ int32_t	main(int argc, char	**argv)
 	if (!mlx)
 		ft_error("mlx failed to init!\n");
 	mlx_set_cursor_mode(mlx, MLX_MOUSE_DISABLED);
-	mlx_set_window_size(mlx, mlx->width * SCALE, mlx->height * SCALE);
+	size = (t_uvec){mlx->width * SCALE, mlx->height * SCALE};
+	mlx_set_window_size(mlx, size.x, size.y);
+	mlx_set_window_pos(mlx, 2560 / 2 - (size.x / 2), 1440 / 2 - (size.y / 2));
 	mlx_key_hook(mlx, c_keys, mlx);
 	mlx_loop_hook(mlx, &c_tick, mlx);
 	mlx_cursor_hook(mlx, &c_mouse, mlx);
