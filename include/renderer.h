@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:22:21 by evallee-          #+#    #+#             */
-/*   Updated: 2024/02/13 16:07:33 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:35:01 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "vector.h"
 # include "assets.h"
 # include "camera.h"
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1024
+# define HEIGHT 576
 # define DRAW_DISTANCE 24
 # define SCALE 2
 

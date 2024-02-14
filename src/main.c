@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 23:25:34 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/14 15:15:03 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:10:28 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int32_t	main(int argc, char	**argv)
 	if (argc < 2)
 		ft_error("Not enough arguments!\n");
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx = mlx_init(WIDTH, HEIGHT, "cube3D", true);
+	mlx = mlx_init(WIDTH, HEIGHT, "cub3D", true);
 	if (!mlx)
 		ft_error("mlx failed to init!\n");
 	mlx_set_cursor_mode(mlx, MLX_MOUSE_DISABLED);
