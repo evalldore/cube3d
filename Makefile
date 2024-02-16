@@ -1,5 +1,5 @@
-NAME		:= cube3d
-CFLAGS		:= -Wall -Wextra -Werror -Ofast -flto
+NAME		:= cub3d
+CFLAGS		:= -Wall -Wextra -Werror -g #-fsanitize=address #-Ofast -flto 
 
 SRCDDIR		:= src/
 BINDIR		:= bin/
@@ -11,7 +11,7 @@ MODULEDIR	:= $(COMPDIR) $(RENDDIR) $(WORLDDIR)
 SRCS		:= main.c cube.c utils.c ray.c camera.c entities.c assets.c controls.c collision.c vector.c
 COMPSRCS	:= position.c direction.c control.c
 RENDSRCS	:= renderer.c color.c buffer.c line.c background.c floor.c
-WORLDSRCS	:= world.c draw.c
+WORLDSRCS	:= world.c draw.c parsing.c
 SRCS		+= $(addprefix $(COMPDIR), $(COMPSRCS))
 SRCS		+= $(addprefix $(RENDDIR), $(RENDSRCS))
 SRCS		+= $(addprefix $(WORLDDIR), $(WORLDSRCS))
@@ -42,7 +42,7 @@ $(BINDIR)%.o: $(SRCDDIR)%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(BINDIR) $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(CFLAGS) $(LIBS) $(HEADERS) -o $(NAME)
 
 $(BINDIR) :
 	mkdir $(BINDIR)

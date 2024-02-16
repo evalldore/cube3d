@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/07 15:31:57 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/14 16:53:05 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,14 @@ t_world		*world_get(void)
 bool	world_init(mlx_t *mlx, char *path)
 {
 	t_world		*world;
-
-	(void)path;
+	
+	if (check_path(path))
+		return (false);
 	world = world_get();
 	world->start.coords = (t_fvec){2.0f, 2.0f};
 	world->start.dir = 270.0f;
 	world->size.x = 16;
 	world->size.y = 16;
-	world->colors[0] = r_calc_color(100, 100, 25, 255);
-	world->colors[1] = r_calc_color(0, 0, 255, 255);
-	world->assets[0] = "assets/mossy.png";
-	world->assets[1] = "assets/mossy.png";
-	world->assets[2] = "assets/mossy.png";
-	world->assets[3] = "assets/mossy.png";
 	world->data = g_map;
 	if (!assets_init(mlx, world->assets))
 		return (false);

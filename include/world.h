@@ -25,5 +25,6 @@ void		world_draw(t_camera cam);
 bool		world_is_wall(t_uvec check);
 bool		world_init(mlx_t *mlx, char *path);
 t_world		*world_get(void);
+int 		check_path(char *path);
 
 #endif
