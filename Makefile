@@ -1,5 +1,5 @@
 NAME		:= cub3d
-CFLAGS		:= -Wall -Wextra -Werror # -g -Ofast -flto
+CFLAGS		:= -Wall -Wextra -Werror #-fsanitize=address -g -Ofast -flto
 
 SRCDDIR		:= src/
 BINDIR		:= bin/
@@ -42,7 +42,7 @@ $(BINDIR)%.o: $(SRCDDIR)%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 $(NAME): $(BINDIR) $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(CFLAGS) $(LIBS) $(HEADERS) -o $(NAME)
 
 $(BINDIR) :
 	mkdir $(BINDIR)
