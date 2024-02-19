@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:09:37 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/16 16:13:07 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:51:00 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,11 +159,11 @@ int assign_texture(char *str)
 	return (0);
 }
 
-int transfer_map(char **map_tmp, int rows, int cols)
+int transfer_map(char **map_tmp, size_t rows, size_t cols)
 {
 	char **map;
-	int i;
-	int j;
+	size_t i;
+	size_t j;
 	
 	map = (char **)ft_calloc(rows, sizeof(char *));
 	i = 0;
@@ -173,7 +173,7 @@ int transfer_map(char **map_tmp, int rows, int cols)
 		j = 0;
 		while (j < cols)
 		{
-			if (map_tmp[i] && map_tmp[i][j] != '\0')
+			if (j < ft_strlen(map_tmp[i]))
 			{
 				if (map_tmp[i][j] == ' ' || map_tmp[i][j] == '\t')
 					map[i][j] = 'x';
@@ -186,9 +186,9 @@ int transfer_map(char **map_tmp, int rows, int cols)
 		map[i][j] = '\0'; 
 		i++;
 	}
-	for(int i = 0; i < rows; i++)
+	for(size_t i = 0; i < rows; i++)
 	{
-		for(int j = 0; j < cols; j++)
+		for(size_t j = 0; j < cols; j++)
 			write(1, &map[i][j], 1);
 		write(1, "\n", 1);
 	}
@@ -197,12 +197,14 @@ int transfer_map(char **map_tmp, int rows, int cols)
 
 int split_map(char *buffer)
 {
+	t_world *world;
 	char **map;
 	int i;
 	int j;
 	int size;
 
 	map = ft_split(buffer, '\n');
+	world = world_get();
 	free(buffer);
 	i = 0;
 	size = 0;
@@ -215,6 +217,8 @@ int split_map(char *buffer)
 		if (j > size)
 			size = j;
 	}
+	// world->size.x = size;
+	// world->size.y = i;
 	return (transfer_map(map, i, size));
 } 
 
