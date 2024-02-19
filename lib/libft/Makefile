@@ -18,7 +18,7 @@ INCDIR		= include/
 BINDIR		= bin/
 SRCDIR		= src/
 LIBC		= ar rcs
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address
 RM			= rm -f
 CC			= gcc
 

@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 20:10:15 by evallee-          #+#    #+#             */
-/*   Updated: 2024/02/15 13:24:19 by aroussea         ###   ########.fr       */
+/*   Created: 2024/02/19 16:54:02 by aroussea          #+#    #+#             */
+/*   Updated: 2024/02/19 17:08:56 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PARSE_H
+# define PARSE_H
+
+#include <unistd.h>
+#include "world.h"
 #include "libft.h"
+#include "renderer.h"
+#include <fcntl.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*buff;
-	size_t	buffl;
+int	check_path(char *path);
+int assign_texture(char *str);
+int	ft_strcmpbyend(char *s1, char *s2);
+int check_color(char *str);
+int extract_map(char *str, int fd);
+int start_pos(char **map);
 
-	if (!s1 || !s2)
-		return (NULL);
-	buffl = ft_strlen(s1) + ft_strlen(s2) + 1;
-	buff = malloc(buffl);
-	if (!buff)
-		return (NULL);
-	ft_strlcpy(buff, s1, buffl);
-	ft_strlcat(buff, s2, buffl);
-	return (buff);
-}
+#endif
