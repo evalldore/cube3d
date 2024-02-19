@@ -6,15 +6,18 @@ BINDIR		:= bin/
 COMPDIR 	:= components/
 RENDDIR		:= renderer/
 WORLDDIR	:= world/
-MODULEDIR	:= $(COMPDIR) $(RENDDIR) $(WORLDDIR) 
+PARSEDIR 	:= parse/
+MODULEDIR	:= $(COMPDIR) $(RENDDIR) $(WORLDDIR) $(PARSEDIR)
 
 SRCS		:= main.c cube.c utils.c ray.c camera.c entities.c assets.c controls.c collision.c vector.c
 COMPSRCS	:= position.c direction.c control.c
 RENDSRCS	:= renderer.c color.c buffer.c line.c background.c floor.c
-WORLDSRCS	:= world.c draw.c parsing.c parse_assets.c parse_colors.c parse_map.c parse_utils.c
+WORLDSRCS	:= world.c draw.c
+PARSESRCS	:= parsing.c parse_assets.c parse_colors.c parse_map.c parse_utils.c
 SRCS		+= $(addprefix $(COMPDIR), $(COMPSRCS))
 SRCS		+= $(addprefix $(RENDDIR), $(RENDSRCS))
 SRCS		+= $(addprefix $(WORLDDIR), $(WORLDSRCS))
+SRCS 		+= $(addprefix $(PARSEDIR), $(PARSESRCS))
 
 LIBMLX		:= lib/MLX42
 LIBFT		:= lib/libft

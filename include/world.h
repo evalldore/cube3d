@@ -17,7 +17,7 @@ typedef struct s_world {
 	t_start		start;
 	uint32_t	colors[2];
 	char		*assets[4];
-	uint8_t		*data;
+	uint8_t		**data;
 
 }	t_world;
 

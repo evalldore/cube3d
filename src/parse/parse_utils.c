@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:04:12 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/19 17:06:47 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:29:21 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ int start_pos(char **map)
 		}
 		i++;
 	}
+	world->data = (uint8_t **)map;
 	return (floodf(copy_map(map), world->start.coords.x, world->start.coords.y));
 }

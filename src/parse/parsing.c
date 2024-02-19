@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:09:37 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/19 17:08:29 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:22:57 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	ft_strcmpbyend(char *s1, char *s2)
 
 static int distribution(char *str, int fd)
 {
+	
 	if (ft_isalpha(str[0]) && str[2] == ' ')
 		return (assign_texture(str));
 	else if (ft_isalpha(str[0]) && str[1] == ' ')
