@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:56:53 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/20 18:38:50 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:56:48 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,18 @@ static int assign_color(long *color, int f)
 	return (0);
 }
 
+static int color_valid(char *str)
+{
+	str++;
+	while (*str)
+	{
+		if (*str != ' ' && *str != '\t' && *str != '-' && *str != ',' && *str != '\n' && !ft_isdigit(*str))
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
 static int extract_color(char *str, int f)
 {
 	int i;
@@ -42,6 +54,11 @@ static int extract_color(char *str, int f)
 
 	i = 0;
 	j = 0;
+	if (color_valid(str))
+	{
+		free(str);
+		return (-1);
+	}
 	while (str[i])
 	{
 		if (ft_isdigit(str[i]) || str[i] == '-')

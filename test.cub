@@ -3,8 +3,8 @@ NO assets/eagle.png
 SO assets/bluestone.png
 EA assets/mossy.png
 
-C 0,   1,0
-F 0,255,    0
+C 1,   255,0
+F 0,0,  0
 
 1111111111111111111111111
 1110100000111111111111101
