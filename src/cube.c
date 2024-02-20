@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/13 15:33:23 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:31:39 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "assets.h"
 #include "utils.h"
 #include "radar.h"
+#include "parse.h"
 
 static uint32_t	g_player;
 
@@ -70,8 +71,23 @@ void	c_tick(void *param)
 	radar_draw(pos->curr);
 }
 
-void	c_exit(void)
+int	c_exit(mlx_t *mlx, int return_val)
 {
+	t_world *world;
+	int i;
+
+	world = world_get();
+	free_map((char **)world->data, 0, world->size.y);
+	i = 0;
+	while (i < 4)
+	{
+		if (world->assets[i])
+			free(world->assets[i]);
+		i++;
+	}
 	ecs_remove(g_player);
-	printf("exitting cub3D\n");
+	mlx_terminate(mlx);
+	if (!return_val)
+		printf("exitting cub3D\n");
+	return (return_val);
 }

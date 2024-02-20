@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:56:53 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/19 16:59:34 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:55:31 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static int extract_color(char *str, int f)
 		if (j == 3)
 			break;
 	}
+	free(str);
 	return (assign_color(colors, f));
 }
 
@@ -72,7 +73,10 @@ static int check_prefix_col(char *str)
 		while (i < 2)
 		{
 			if (!ft_strcmpbyend(sub, poss_pre_dir[i]))
+			{
+				free(sub);
 				return (i);
+			}
 			i++;
 		}
 		free(sub);

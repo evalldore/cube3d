@@ -6,11 +6,29 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:04:12 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/19 17:29:21 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:40:45 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+int free_map(char **map, int return_val, size_t y)
+{
+	size_t i;
+
+	i = 0;
+	if (map)
+	{
+		while (i < y)
+		{
+			free (map[i]);
+			i++;
+		}
+		free (map);
+		map = NULL;
+	}
+	return (return_val);
+}
 
 static int floodf(char **map, size_t x, size_t y)
 {
@@ -84,6 +102,7 @@ static char **copy_map(char **map)
 
 int start_pos(char **map)
 {
+	char **cpy;
 	size_t i;
 	size_t j;
 	t_world *world;
@@ -105,5 +124,6 @@ int start_pos(char **map)
 		i++;
 	}
 	world->data = (uint8_t **)map;
-	return (floodf(copy_map(map), world->start.coords.x, world->start.coords.y));
+	cpy = copy_map(map);
+	return (free_map(cpy, floodf(cpy, world->start.coords.x, world->start.coords.y), world->size.y));
 }

@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:51:26 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/19 16:54:44 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:55:09 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static int check_prefix_dir(char *str)
 		while (i < 4)
 		{
 			if (!ft_strcmpbyend(sub, poss_pre_dir[i]))
+			{
+				free(sub);
 				return (i);
+			}
 			i++;
 		}
 		free(sub);

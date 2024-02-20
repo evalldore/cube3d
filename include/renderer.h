@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   renderer.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:22:21 by evallee-          #+#    #+#             */
-/*   Updated: 2024/02/14 16:35:01 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:26:21 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # include "vector.h"
 # include "assets.h"
 # include "camera.h"
-# define WIDTH 1024
-# define HEIGHT 576
-# define DRAW_DISTANCE 24
-# define SCALE 2
+# define WIDTH 1920
+# define HEIGHT 1080
+# define DRAW_DISTANCE 200
+# define SCALE 1
 
 typedef struct s_buffer
 {

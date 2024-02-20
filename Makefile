@@ -1,5 +1,5 @@
 NAME		:= cub3d
-CFLAGS		:= -Wall -Wextra -Werror -g #-fsanitize=address #-Ofast -flto 
+CFLAGS		:= -Wall -Wextra -Werror -g #-Ofast -flto 
 
 SRCDDIR		:= src/
 BINDIR		:= bin/
@@ -30,7 +30,7 @@ OBJS		:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 all: libmlx libft ecs $(NAME)
 
 leaks:
-	leaks --atExit -- ./$(NAME)
+	leaks --atExit -- ./$(NAME) test.cub
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4

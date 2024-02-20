@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:09:37 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/19 17:22:57 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:04:33 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,42 @@ int	ft_strcmpbyend(char *s1, char *s2)
 	return (0);
 }
 
+static char *cut_spaces(char *str)
+{
+	char *sub;
+	int i;
+	
+	i = 0;
+	if (str[i] != ' ' && str[i] != '\t')
+		return (str);
+	while (str[i] == ' ' || str[i] == '\t')
+	{
+		if (ft_isdigit(str[i + 1]))
+			return (str);
+		else if (str[i + 1] == '\n')
+		{
+			free(str);
+			return (NULL);
+		}
+		i++;
+	}
+	sub = ft_substr(str, i, ft_strlen(str) - i);
+	free(str);
+	return (sub);
+}
+
 static int distribution(char *str, int fd)
 {
-	
-	if (ft_isalpha(str[0]) && str[2] == ' ')
+	str = cut_spaces(str);
+	if (str == NULL)
+		return (-1);
+	else if (str[0] == '\n')
+		return (0);
+	else if (ft_isalpha(str[0]) && str[2] == ' ')
 		return (assign_texture(str));
 	else if (ft_isalpha(str[0]) && str[1] == ' ')
 		return (check_color(str));
-	else if (str[0] == '\n')
-		return (0);
-	else
-		return (extract_map(str, fd));
-	return (0);
+	return (extract_map(str, fd));
 }
 
 static int parsing(int fd)
@@ -62,6 +86,11 @@ static int parsing(int fd)
 		str = ft_get_next_line(fd);
 		if (str == NULL)
 			break;
+		if (str[0] == '\n' && !str[1])
+		{
+			free(str);
+			continue;
+		}
 		if (distribution(str, fd) == -1)
 			return (1);
 	}

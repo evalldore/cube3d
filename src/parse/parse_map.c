@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:01:13 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/19 17:03:36 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:41:29 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int transfer_map(char **map_tmp, size_t rows, size_t cols)
 		map[i][j] = '\0'; 
 		i++;
 	}
+	free_map(map_tmp, 0, rows);
 	return (start_pos(map));
 }
 
