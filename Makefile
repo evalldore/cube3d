@@ -1,5 +1,5 @@
 NAME		:= cub3d
-CFLAGS		:= -Wall -Wextra -Werror -g #-Ofast -flto 
+CFLAGS		:= -Wall -Wextra -Werror -Ofast -flto 
 
 SRCDDIR		:= src/
 BINDIR		:= bin/

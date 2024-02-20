@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:56:53 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/20 15:55:31 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:38:50 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int extract_color(char *str, int f)
 	j = 0;
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]))
+		if (ft_isdigit(str[i]) || str[i] == '-')
 		{
 			len = ft_strchr(&str[i], ',') - (&str[i]);
 			sub = ft_substr(str, (&str[i] - str), len);
