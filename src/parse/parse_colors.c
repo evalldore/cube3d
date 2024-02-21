@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:56:53 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/20 18:56:48 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:03:00 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,10 @@ int check_color(char *str)
 
 	res = check_prefix_col(str);
 	if (res == -1)
+	{
+		free(str);
 		return (-1);
+	}
 	if (res == 0)
 		return (extract_color(str, 1));
 	else

@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:01:13 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/20 15:41:29 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:08:00 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,19 @@ int extract_map(char *str, int fd)
 	buffer = str;
 	check = ft_get_next_line(fd);
 	if (check_map_char(buffer) == 1)
-			return (-1);
+	{
+		free(buffer);
+		free(check);
+		return (-1);
+	}
 	while (check != NULL)
 	{
 		if (check_map_char(check) == 1)
+		{
+			free(buffer);
+			free(check);
 			return (-1);
+		}
 		tmp = ft_strjoin(buffer, check);
 		free(buffer);
 		free(check);
