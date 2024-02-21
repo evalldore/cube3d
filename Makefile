@@ -24,7 +24,18 @@ LIBFT		:= lib/libft
 LIBECS		:= lib/ecs
 
 HEADERS		:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include -I $(LIBECS)/include
-LIBS		:= $(LIBECS)/ecs.a $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
+LIBS		:= $(LIBECS)/ecs.a $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -pthread -lm
+
+GLFW_HEADER := /Users/$(USER)/.brew/opt/glfw
+
+TEST_RESULT := $(shell test -d $(GLFW_HEADER) && echo yes || echo no)
+
+ifeq ($(TEST_RESULT),yes)
+    LIBS += -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+else
+    $(error GLFW headers not found, please install GLFW)
+endif
+
 OBJS		:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 
 all: libmlx libft ecs $(NAME)
