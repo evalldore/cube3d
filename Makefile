@@ -30,7 +30,7 @@ OBJS		:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 all: libmlx libft ecs $(NAME)
 
 leaks:
-	leaks --atExit -- ./$(NAME) test.cub
+	leaks --atExit -- ./$(NAME) maps/test.cub
 
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4

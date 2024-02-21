@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/20 16:31:39 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:21:09 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	c_tick(void *param)
 
 int	c_exit(mlx_t *mlx, int return_val)
 {
-	t_world *world;
-	int i;
+	t_world	*world;
+	int		i;
 
 	world = world_get();
 	free_map((char **)world->data, 0, world->size.y);

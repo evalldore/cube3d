@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:42:38 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/13 15:38:05 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:46:19 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <unistd.h>
 #include "utils.h"
+
+int	ft_err(char *str)
+{
+	while (*str)
+		write(2, str++, 1);
+	return (1);
+}
 
 float	dist(float x1, float y1, float x2, float y2)
 {

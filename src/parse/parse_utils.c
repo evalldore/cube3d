@@ -6,15 +6,15 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:04:12 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/20 15:40:45 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:34:25 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 
-int free_map(char **map, int return_val, size_t y)
+int	free_map(char **map, int return_val, size_t y)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (map)
@@ -30,9 +30,9 @@ int free_map(char **map, int return_val, size_t y)
 	return (return_val);
 }
 
-static int floodf(char **map, size_t x, size_t y)
+static int	floodf(char **map, size_t x, size_t y)
 {
-	t_world *world;
+	t_world	*world;
 
 	world = world_get();
 	if (x >= world->size.x || y >= world->size.y)
@@ -53,9 +53,9 @@ static int floodf(char **map, size_t x, size_t y)
 	return (0);
 }
 
-static void start_dir(char c)
+static void	start_dir(char c)
 {
-	t_world *world;
+	t_world	*world;
 
 	world = world_get();
 	if (c == 'N')
@@ -68,14 +68,12 @@ static void start_dir(char c)
 		world->start.dir = 0.0f;
 }
 
-static char **copy_map(char **map)
+static char	**copy_map(char **map, t_world *world)
 {
-	t_world *world;
-	char **cpy;
-	size_t i;
-	size_t j;
+	char	**cpy;
+	size_t	i;
+	size_t	j;
 
-	world = world_get();
 	cpy = (char **)ft_calloc(world->size.y, sizeof(char *));
 	if (cpy == NULL)
 		return (NULL);
@@ -89,23 +87,22 @@ static char **copy_map(char **map)
 		while (j < world->size.x)
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'x')
-				cpy[i][j] = '0';
+				cpy[i][j++] = '0';
 			else
 				cpy[i][j] = map[i][j];
 			j++;
 		}
-		cpy[i][j] = '\0'; 
-		i++;
+		cpy[i++][j] = '\0';
 	}
 	return (cpy);
 }
 
-int start_pos(char **map)
+int	start_pos(char **map)
 {
-	char **cpy;
-	size_t i;
-	size_t j;
-	t_world *world;
+	t_world	*world;
+	char	**cpy;
+	size_t	i;
+	size_t	j;
 
 	world = world_get();
 	i = 0;
@@ -124,6 +121,7 @@ int start_pos(char **map)
 		i++;
 	}
 	world->data = (uint8_t **)map;
-	cpy = copy_map(map);
-	return (free_map(cpy, floodf(cpy, world->start.coords.x, world->start.coords.y), world->size.y));
+	cpy = copy_map(map, world);
+	return (free_map(cpy, floodf(cpy, world->start.coords.x,
+				world->start.coords.y), world->size.y));
 }

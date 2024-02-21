@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:35:40 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/20 18:29:55 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:40:17 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include "libft.h"
 #include "parse.h"
 
-static int is_valid(void)
+static int	is_valid(void)
 {
-	t_world *world;
-	int i;
-	
+	t_world	*world;
+	int		i;
+
 	world = world_get();
 	if (world->data == NULL)
 		return (printf("Error\nNo map!\n"));
@@ -53,7 +53,7 @@ t_world	*world_get(void)
 bool	world_init(mlx_t *mlx, char *path)
 {
 	t_world		*world;
-	
+
 	if (check_path(path))
 		return (false);
 	if (is_valid())

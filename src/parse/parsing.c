@@ -6,18 +6,11 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 14:09:37 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/20 18:04:33 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:45:07 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
-
-static int	ft_err(char *str)
-{
-	while (*str)
-		write(2, str++, 1);
-	return (1);
-}
 
 int	ft_strcmpbyend(char *s1, char *s2)
 {
@@ -39,11 +32,11 @@ int	ft_strcmpbyend(char *s1, char *s2)
 	return (0);
 }
 
-static char *cut_spaces(char *str)
+static char	*cut_spaces(char *str)
 {
-	char *sub;
-	int i;
-	
+	char	*sub;
+	int		i;
+
 	i = 0;
 	if (str[i] != ' ' && str[i] != '\t')
 		return (str);
@@ -53,17 +46,17 @@ static char *cut_spaces(char *str)
 			return (str);
 		else if (str[i + 1] == '\n')
 		{
-			free(str);
+			free (str);
 			return (NULL);
 		}
 		i++;
 	}
 	sub = ft_substr(str, i, ft_strlen(str) - i);
-	free(str);
+	free (str);
 	return (sub);
 }
 
-static int distribution(char *str, int fd)
+static int	distribution(char *str, int fd)
 {
 	str = cut_spaces(str);
 	if (str == NULL)
@@ -77,19 +70,19 @@ static int distribution(char *str, int fd)
 	return (extract_map(str, fd));
 }
 
-static int parsing(int fd)
+static int	parsing(int fd)
 {
-	char *str;
+	char	*str;
 
 	while (true)
 	{
 		str = ft_get_next_line(fd);
 		if (str == NULL)
-			break;
+			break ;
 		if (str[0] == '\n' && !str[1])
 		{
-			free(str);
-			continue;
+			free (str);
+			continue ;
 		}
 		if (distribution(str, fd) == -1)
 			return (1);
@@ -99,7 +92,7 @@ static int parsing(int fd)
 
 int	check_path(char *path)
 {
-	int fd;
+	int	fd;
 
 	if (ft_strcmpbyend(path, ".cub"))
 		return (ft_err("Error\nThe file isn't a .cub file.\n"));

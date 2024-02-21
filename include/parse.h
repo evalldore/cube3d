@@ -6,7 +6,7 @@
 /*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:54:02 by aroussea          #+#    #+#             */
-/*   Updated: 2024/02/20 15:40:53 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:48:32 by aroussea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "world.h"
 #include "libft.h"
 #include "renderer.h"
+#include "utils.h"
 #include <fcntl.h>
 
 int	check_path(char *path);
