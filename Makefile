@@ -38,7 +38,7 @@ all: libmlx libft $(NAME)
 
 bonus: CFLAGS += -DBONUS=1
 
-bonus: all
+bonus: re
 
 leaks:
 	leaks --atExit -- ./$(NAME) maps/test.cub
