@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:20:54 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/21 15:16:49 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:58:32 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ bool	c_init(mlx_t *mlx, char *path)
 	if (BONUS)
 		radar_init(mlx);
 	player = player_get();
-	player->pos = world->start.coords;
+	player->pos.x = world->start.coords.x + 0.5f;
+	player->pos.y = world->start.coords.y + 0.5f;
 	player->dir = deg2rad(world->start.dir);
 	return (true);
 }
