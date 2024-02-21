@@ -20,7 +20,18 @@ LIBMLX		:= lib/MLX42
 LIBFT		:= lib/libft
 
 HEADERS		:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include
-LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
+LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -pthread -lm
+
+GLFW_HEADER := /Users/$(USER)/.brew/opt/glfw
+
+TEST_RESULT := $(shell test -d $(GLFW_HEADER) && echo yes || echo no)
+
+ifeq ($(TEST_RESULT),yes)
+    LIBS += -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+else
+    $(error GLFW headers not found, please install GLFW)
+endif
+
 OBJS		:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 
 all: libmlx libft $(NAME)
@@ -49,7 +60,7 @@ $(BINDIR) :
 	mkdir $(addprefix $(BINDIR), $(MODULEDIR))
 
 clean:
-	@rm -r $(BINDIR)
+	@rm -rf $(BINDIR)
 	$(MAKE) -C $(LIBFT) fclean
 	@rm -rf $(LIBMLX)/build
 
@@ -58,4 +69,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all, clean, fclean, re, libmlx, libft
+.PHONY: all, clean, fclean, re, libmlx, libft, bonus, leaks
