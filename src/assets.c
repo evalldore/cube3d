@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   assets.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroussea <aroussea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 05:06:31 by niceguy           #+#    #+#             */
-/*   Updated: 2024/02/09 15:14:40 by aroussea         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:10:08 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "assets.h"
 
-static mlx_texture_t	*g_assets[MAX_ASSETS];
+static mlx_texture_t	**get_array(void)
+{
+	static mlx_texture_t	*assets[MAX_ASSETS];
+
+	return (assets);
+}
 
 static bool	assets_load(mlx_t *mlx, int32_t asset, const char *path)
 {
@@ -22,7 +27,7 @@ static bool	assets_load(mlx_t *mlx, int32_t asset, const char *path)
 	texture = mlx_load_png(path);
 	if (!texture)
 		return (false);
-	g_assets[asset] = texture;
+	get_array()[asset] = texture;
 	return (true);
 }
 
@@ -30,7 +35,7 @@ mlx_texture_t	*assets_get(int32_t	asset)
 {
 	if (asset <= ASSET_NONE || asset >= MAX_ASSETS)
 		return (NULL);
-	return (g_assets[asset]);
+	return (get_array()[asset]);
 }
 
 bool	assets_init(mlx_t *mlx, char *paths[])

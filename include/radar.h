@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:29:19 by evallee-          #+#    #+#             */
-/*   Updated: 2024/02/08 17:32:05 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:17:01 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # define UNIT_SIZE 4
 
 void	radar_init(mlx_t *mlx);
-void	radar_draw(t_fvec pos);
+void	radar_draw(t_world *world, t_fvec pos);
 
 #endif

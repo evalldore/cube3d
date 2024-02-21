@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 19:34:42 by evallee-          #+#    #+#             */
-/*   Updated: 2024/02/13 16:03:58 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:24:55 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@
 #include <stdio.h>
 #include <math.h>
 
-static mlx_image_t	*g_floor;
+static mlx_image_t	**get_image(void)
+{
+	static mlx_image_t	*floor;
+
+	return (&floor);
+}
 
 static void	scan_line(t_camera cam, int32_t y, t_fvec dir, t_fvec plane)
 {
@@ -37,7 +42,7 @@ static void	scan_line(t_camera cam, int32_t y, t_fvec dir, t_fvec plane)
 	while (x < WIDTH)
 	{
 		if ((uint32_t)floor.x % 2 == (uint32_t)floor.y % 2)
-			mlx_put_pixel(g_floor, x, y, world_get()->colors[0]);
+			mlx_put_pixel(*get_image(), x, y, world_get()->colors[0]);
 		floor.x += floor_step.x;
 		floor.y += floor_step.y;
 		x++;
@@ -49,11 +54,13 @@ void	r_floor_draw(t_camera cam)
 	uint32_t	y;
 	t_fvec		dir;
 	t_fvec		plane;
+	mlx_image_t	*floor;
 
+	floor = *get_image();
 	y = 0;
 	plane = camera_get_plane(cam);
 	dir = camera_get_direction(cam);
-	ft_memset(g_floor->pixels, 0, (WIDTH * (HEIGHT / 2)) * sizeof(uint32_t));
+	ft_memset(floor->pixels, 0, (WIDTH * (HEIGHT / 2)) * sizeof(uint32_t));
 	while (y < HEIGHT / 2)
 	{
 		scan_line(cam, y, dir, plane);
@@ -63,6 +70,6 @@ void	r_floor_draw(t_camera cam)
 
 void	r_floor_init(mlx_t *mlx)
 {
-	g_floor = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
-	mlx_image_to_window(mlx, g_floor, 0, HEIGHT / 2);
+	*get_image() = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
+	mlx_image_to_window(mlx, *get_image(), 0, HEIGHT / 2);
 }

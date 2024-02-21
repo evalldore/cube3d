@@ -3,31 +3,31 @@ CFLAGS		:= -Wall -Wextra -Werror -Ofast -flto
 
 SRCDDIR		:= src/
 BINDIR		:= bin/
-COMPDIR 	:= components/
 RENDDIR		:= renderer/
 WORLDDIR	:= world/
 PARSEDIR 	:= parse/
 MODULEDIR	:= $(COMPDIR) $(RENDDIR) $(WORLDDIR) $(PARSEDIR)
 
-SRCS		:= main.c cube.c utils.c ray.c camera.c entities.c assets.c controls.c collision.c vector.c radar.c
-COMPSRCS	:= position.c direction.c control.c
+SRCS		:= main.c cube.c utils.c ray.c camera.c assets.c controls.c collision.c vector.c radar.c player.c
 RENDSRCS	:= renderer.c color.c buffer.c line.c background.c floor.c
 WORLDSRCS	:= world.c draw.c
 PARSESRCS	:= parsing.c parse_assets.c parse_colors.c parse_map.c parse_utils.c
-SRCS		+= $(addprefix $(COMPDIR), $(COMPSRCS))
 SRCS		+= $(addprefix $(RENDDIR), $(RENDSRCS))
 SRCS		+= $(addprefix $(WORLDDIR), $(WORLDSRCS))
 SRCS 		+= $(addprefix $(PARSEDIR), $(PARSESRCS))
 
 LIBMLX		:= lib/MLX42
 LIBFT		:= lib/libft
-LIBECS		:= lib/ecs
 
-HEADERS		:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include -I $(LIBECS)/include
-LIBS		:= $(LIBECS)/ecs.a $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
+HEADERS		:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include
+LIBS		:= $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/" -pthread -lm
 OBJS		:= $(addprefix $(BINDIR), $(SRCS:.c=.o))
 
-all: libmlx libft ecs $(NAME)
+all: libmlx libft $(NAME)
+
+bonus: CFLAGS += -DBONUS=1
+
+bonus: all
 
 leaks:
 	leaks --atExit -- ./$(NAME) maps/test.cub
@@ -37,9 +37,6 @@ libmlx:
 
 libft:
 	$(MAKE) -C $(LIBFT)
-
-ecs:
-	$(MAKE) -C $(LIBECS)
 
 $(BINDIR)%.o: $(SRCDDIR)%.c
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
@@ -54,7 +51,6 @@ $(BINDIR) :
 clean:
 	@rm -r $(BINDIR)
 	$(MAKE) -C $(LIBFT) fclean
-	$(MAKE) -C $(LIBECS) fclean
 	@rm -rf $(LIBMLX)/build
 
 fclean: clean

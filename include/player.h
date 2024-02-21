@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   direction.c                                        :+:      :+:    :+:   */
+/*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 20:38:42 by niceguy           #+#    #+#             */
-/*   Updated: 2023/12/29 19:22:22 by evallee-         ###   ########.fr       */
+/*   Created: 2024/02/21 14:39:52 by evallee-          #+#    #+#             */
+/*   Updated: 2024/02/21 15:03:47 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "entities.h"
+#ifndef PLAYER_H
+# define PLAYER_H
+# include <stdbool.h>
+# include "vector.h"
 
-void	direction_new(void	*ptr, va_list args)
+typedef struct s_ctrl
 {
-	t_comp_dir	*dir;
+	bool	up;
+	bool	down;
+	bool	left;
+	bool	right;
+	bool	turn_left;
+	bool	turn_right;
+}	t_control;
 
-	dir = ptr;
-	dir->curr = (float)va_arg(args, double);
-	dir->last = dir->curr;
-}
-
-void	comp_dir_reg(void)
+typedef struct s_ply
 {
-	ecs_comp_register(COMP_DIR, sizeof(t_comp_dir), direction_new, NULL);
-}
+	t_fvec		pos;
+	float		dir;
+	t_control	ctrl;
+}	t_player;
+
+t_player		*player_get(void);
+
+#endif

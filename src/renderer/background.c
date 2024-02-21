@@ -6,7 +6,7 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:17:15 by evallee-          #+#    #+#             */
-/*   Updated: 2024/02/14 14:58:51 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:19:37 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <math.h>
 #include "renderer.h"
 #include "world.h"
-
-static mlx_image_t	*g_background;
 
 static uint32_t	calc_shade(uint32_t coordy, uint32_t colors[])
 {
@@ -62,11 +60,12 @@ void	r_back_init(mlx_t	*mlx)
 	uint32_t	top_color;
 	uint32_t	bottom_color;
 	t_world		*world;
+	mlx_image_t	*image;
 
 	world = world_get();
 	top_color = world->colors[1];
 	bottom_color = r_calc_color(255, 255, 255, 255);
-	g_background = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
-	shade(g_background, top_color, bottom_color);
-	mlx_image_to_window(mlx, g_background, 0, 0);
+	image = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
+	shade(image, top_color, bottom_color);
+	mlx_image_to_window(mlx, image, 0, 0);
 }

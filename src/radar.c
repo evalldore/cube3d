@@ -6,13 +6,18 @@
 /*   By: evallee- <evallee-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 15:28:50 by evallee-          #+#    #+#             */
-/*   Updated: 2024/02/13 15:55:32 by evallee-         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:17:43 by evallee-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "radar.h"
 
-static mlx_image_t	*g_image;
+static mlx_image_t	**get_image(void)
+{
+	static mlx_image_t	*image;
+
+	return (&image);
+}
 
 static void	draw_square(uint32_t x, uint32_t y, uint32_t size, uint32_t color)
 {
@@ -21,20 +26,20 @@ static void	draw_square(uint32_t x, uint32_t y, uint32_t size, uint32_t color)
 	i = 0;
 	while (i < (size * size))
 	{
-		mlx_put_pixel(g_image, x + (i % size), y + (i / size), color);
+		mlx_put_pixel(*get_image(), x + (i % size), y + (i / size), color);
 		i++;
 	}
 }
 
-void	radar_draw(t_fvec pos)
+void	radar_draw(t_world *world, t_fvec pos)
 {
 	t_uvec		coords;
 	uint32_t	color;
-	t_world		*world;
 	t_uvec		unit_pos;
+	mlx_image_t	*image;
 
-	world = world_get();
-	ft_memset(g_image->pixels, 0, g_image->width * g_image->height);
+	image = *get_image();
+	ft_memset(image->pixels, 0, image->width * image->height);
 	coords = (t_uvec){0, 0};
 	while (coords.x < world->size.x)
 	{
@@ -56,13 +61,15 @@ void	radar_draw(t_fvec pos)
 
 void	radar_init(mlx_t	*mlx)
 {
-	t_world	*world;
-	t_uvec	radar_size;
+	t_world		*world;
+	t_uvec		radar_size;
+	mlx_image_t	*image;
 
 	world = world_get();
 	radar_size = (t_uvec){world->size.x * UNIT_SIZE, world->size.y * UNIT_SIZE};
-	g_image = mlx_new_image(mlx, radar_size.x, radar_size.y);
-	if (!g_image)
+	image = mlx_new_image(mlx, radar_size.x, radar_size.y);
+	if (!image)
 		return ;
-	mlx_image_to_window(mlx, g_image, 15, 15);
+	mlx_image_to_window(mlx, image, 15, 15);
+	*get_image() = image;
 }
